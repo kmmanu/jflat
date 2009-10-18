@@ -1,0 +1,32 @@
+<project name="jflat" default="test" basedir=".">
+
+	<target name="compile">
+		<ant antfile="build-code.xml" target="compile" />
+	</target>
+
+	<target name="test" depends="compile">
+		<ant antfile="build-test.xml" target="test.report" />
+	</target>
+
+	<!--
+	<target name="reports" depends="compile">
+		<ant antfile="build-reports.xml" target="reports">
+		</ant>
+	</target>
+	-->
+	
+	<target name="dist" depends="compile">
+		<ant antfile="build-dist.xml" target="dist" />
+	</target>
+		
+
+	<target name="clean">
+		<ant antfile="build-test.xml" target="clean" />
+		<ant antfile="build-code.xml" target="clean" />
+		<!--
+		<ant antfile="build-reports.xml" target="clean" />
+		<ant antfile="build-dist.xml" target="clean" />
+		-->
+	</target>
+
+</project>
