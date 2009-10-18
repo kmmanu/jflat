@@ -1,7 +1,12 @@
 = Getting started with JFlat =
 
-Add your content here.
+== How to read a CSV file into an list of String[] ==
 
+<verbatim>
+FileReader fr = new FileReader("testdata/prices.csv");
+DefaultCSVReader reader = new DefaultCSVReader(fr);
+List<String[]> lines = reader.readAll();
+</verbatim>
 
 = Details =
 
