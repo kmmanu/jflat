@@ -22,6 +22,7 @@ The main class responsible for <i>reading</i> flat files is *FlatFileReader*. Th
 A *CSVReader* is a FlatFileReader configured with a *CSVParser* which parses CSV lines into an array of tokens. The CSVReader needs a ReaderRowMapper to translate the parsed lines into objects.
 The *BeanReaderRowMapper* can be used to map lines in a flat file into Java beans. To configure a BeanReaderRowMapper you must tell it how to map column into bean properties. The most common way of doing this is by mapping column names to property names. 
 
+You can do this by explicitly supplying a map of column names to properties:
 {{{
 Map<String, String> map = new HashMap<String, String>();
         map.put("First Name", "firstName");
@@ -30,4 +31,16 @@ Map<String, String> map = new HashMap<String, String>();
         ReaderRowMapper<Contact> rowMapper = new BeanReaderRowMapper<Contact>(Contact.class, mappingStrategy);
         FileReader reader = new FileReader("testdata/contacts.csv");
         CSVReader<Contact> csvReader = new CSVReader<Contact>(reader, rowMapper);
+}}}
+
+
+or in a more compact form by passing an array of properties and an array of headers:
+
+{{{
+        ReaderRowMapper<Contact> rowMapper = new BeanReaderRowMapper<Contact>(Contact.class, 
+                new String[] {"firstName", "lastName"},
+                new String[] {"First Name","Last Name"});
+        FileReader reader = new FileReader("testdata/contacts.csv");
+        CSVReader<Contact> csvReader = new CSVReader<Contact>(reader, rowMapper);
+        List<Contact> contacts = csvReader.readAll();
 }}}
