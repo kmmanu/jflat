@@ -23,7 +23,6 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 import com.tecacet.jflat.om.Order;
-import com.tecacet.util.introspection.CommonsPropertyUtilsPropertyAccessor;
 
 public class BeanReaderRowMapperTest {
 

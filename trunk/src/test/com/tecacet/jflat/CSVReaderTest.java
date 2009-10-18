@@ -44,7 +44,6 @@ public class CSVReaderTest {
         assertEquals("Cohen",c.getLastName());
     }
     
-    
     @Test
     public void testReadWithHeaderColumnNameMapping() throws Exception {
         Map<String, String> map = new HashMap<String, String>();
@@ -52,6 +51,18 @@ public class CSVReaderTest {
         map.put("Last Name", "lastName");
         ColumnMapping mappingStrategy = new HeaderColumnNameMapping(map);
         ReaderRowMapper<Contact> rowMapper = new BeanReaderRowMapper<Contact>(Contact.class, mappingStrategy);
+        FileReader reader = new FileReader("testdata/contacts.csv");
+        CSVReader<Contact> csvReader = new CSVReader<Contact>(reader, rowMapper);
+        List<Contact> contacts = csvReader.readAll();
+        Contact c = contacts.get(1);
+        assertEquals("Cohen",c.getLastName());
+    }
+    
+    @Test
+    public void testReadWithHeaderColumnNameMappingAsArray() throws Exception {
+        ReaderRowMapper<Contact> rowMapper = new BeanReaderRowMapper<Contact>(Contact.class, 
+                new String[] {"firstName", "lastName"},
+                new String[] {"First Name","Last Name"});
         FileReader reader = new FileReader("testdata/contacts.csv");
         CSVReader<Contact> csvReader = new CSVReader<Contact>(reader, rowMapper);
         List<Contact> contacts = csvReader.readAll();

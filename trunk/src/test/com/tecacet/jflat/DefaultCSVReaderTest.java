@@ -1,7 +1,10 @@
 package com.tecacet.jflat;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
@@ -11,7 +14,7 @@ import org.junit.Test;
 
 public class DefaultCSVReaderTest {
 
-    CSVReader<String[]> csvr;
+    CSVReader<String[]> csvReader;
 
     /**
      * Setup the test.
@@ -30,7 +33,7 @@ public class DefaultCSVReaderTest {
         sb.append("\"\"\"\"\"\",\"test\"\n"); // """""","test" representing:
         // "", test
         sb.append("\"a\nb\",b,\"\nd\",e\n");
-        csvr = new DefaultCSVReader(new StringReader(sb.toString()));
+        csvReader = new DefaultCSVReader(new StringReader(sb.toString()));
     }
 
     /**
@@ -43,40 +46,39 @@ public class DefaultCSVReaderTest {
     public void testParseLine() throws IOException {
 
         // test normal case
-        String[] nextLine = csvr.readNext();
+        String[] nextLine = csvReader.readNext();
         assertEquals("a", nextLine[0]);
         assertEquals("b", nextLine[1]);
         assertEquals("c", nextLine[2]);
 
         // test quoted commas
-        nextLine = csvr.readNext();
+        nextLine = csvReader.readNext();
         assertEquals("a", nextLine[0]);
         assertEquals("b,b,b", nextLine[1]);
         assertEquals("c", nextLine[2]);
 
         // test empty elements
-        nextLine = csvr.readNext();
+        nextLine = csvReader.readNext();
         assertEquals(3, nextLine.length);
 
         // test multiline quoted
-        nextLine = csvr.readNext();
+        nextLine = csvReader.readNext();
         assertEquals(3, nextLine.length);
 
         // test quoted quote chars
-        nextLine = csvr.readNext();
+        nextLine = csvReader.readNext();
         assertEquals("Glen \"The Man\" Smith", nextLine[0]);
 
-        nextLine = csvr.readNext();
+        nextLine = csvReader.readNext();
         assertTrue(nextLine[0].equals("\"\"")); // check the tricky situation
         assertTrue(nextLine[1].equals("test")); // make sure we didn't ruin the
         // next field..
 
-        nextLine = csvr.readNext();
+        nextLine = csvReader.readNext();
         assertEquals(4, nextLine.length);
 
         // test end of stream
-        assertEquals(null, csvr.readNext());
-
+        assertNull(csvReader.readNext());
     }
 
     /**
@@ -87,10 +89,8 @@ public class DefaultCSVReaderTest {
      */
     @Test
     public void testParseAll() throws IOException {
-
-        List<String[]> allElements = csvr.readAll();
+        List<String[]> allElements = csvReader.readAll();
         assertEquals(7, allElements.size());
-
     }
 
     /**
@@ -159,10 +159,7 @@ public class DefaultCSVReaderTest {
 
         String[] nextLine = c.readNext();
         assertEquals(3, nextLine.length);
-
-        System.out.println(nextLine[1]);
         assertEquals("123\"4\"567", nextLine[1]);
-
     }
 
     @Test
@@ -186,4 +183,11 @@ public class DefaultCSVReaderTest {
 
     }
 
+    @Test
+    public void testReadIntoString() throws IOException {
+        FileReader fr = new FileReader("testdata/prices.csv");
+        DefaultCSVReader reader = new DefaultCSVReader(fr);
+        List<String[]> lines = reader.readAll();
+        assertEquals(254, lines.size());
+    }
 }
