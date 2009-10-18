@@ -3,6 +3,8 @@
 	<property file="build-code.properties" />
 	<property file="build-dist.properties" />
 
+	<import file="build-classpath.xml"/>
+	
 	<target name="init">
 		<mkdir dir="${dist.dir}" />
 	</target>
