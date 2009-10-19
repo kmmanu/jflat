@@ -1,4 +1,4 @@
-<project name="jflat-classpath" default="compile" basedir=".">
+<project name="jflat-classpath" basedir=".">
 
 	<property file="build-code.properties" />
 
@@ -11,6 +11,14 @@
 	<path id="run.class.path">
 		<path refid="class.path" />
 		<dirset dir="${build.classes}" />
+	</path>
+	
+
+	<path id="junit.class.path">
+		<path refid="run.class.path" />
+		<fileset dir="${lib.dir}">
+			<include name="**.jar" />
+		</fileset>
 	</path>
 	
 </project>

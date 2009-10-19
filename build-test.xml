@@ -6,13 +6,6 @@
 
 	<import file="build-classpath.xml" />
 
-	<path id="junit.class.path">
-		<path refid="run.class.path" />
-		<fileset dir="${lib.dir}">
-			<include name="**.jar" />
-		</fileset>
-	</path>
-
 	<target name="init">
 		<mkdir dir="${test.classes}" />
 		<mkdir dir="${junit.report.dir}" />
