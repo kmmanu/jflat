@@ -1,6 +1,12 @@
-<project name="jflat-reports" default="test.instrumented" basedir=".">
+<project name="jflat-reports" default="reports" basedir=".">
 
-<path id="cobertura.classpath">
+	<property file="build-code.properties" />
+	<property file="build-test.properties"/>
+	<property file="build-reports.properties"/>
+	
+	<import file="build-classpath.xml"/>
+	
+	<path id="cobertura.classpath">
 		<fileset dir="${cobertura.dir}">
 			<include name="cobertura.jar" />
 			<include name="lib/**/*.jar" />
@@ -47,7 +53,11 @@
 	</target>
 	
 	
-	<target name="test.instrumented" depends="compile.tests,instrument" description="Runs the unit tests">
+	<target name="compile.tests" depends="init" description="Compiles all unit test source">
+			<javac srcdir="${src.test}" destdir="${test.classes}" classpathref="junit.class.path" />
+	</target>
+	
+	<target name="test.instrumented" depends="instrument,compile.tests" description="Runs the unit tests">
 		<junit forkMode="perBatch" printsummary="true" showoutput="false" fork="true" failureproperty="tests-failed">
 			<sysproperty key="net.sourceforge.cobertura.datafile" file="cobertura.ser" />
 			<classpath>
@@ -64,14 +74,21 @@
 				</fileset>
 			</batchtest>
 		</junit>
-		<cobertura-check totallinerate="${totallinerate}" totalbranchrate="${totalbranchrate}" />
 	</target>
 	
-
-
+	<target name="test.report" depends="test.instrumented" description="generate HTML unit test reports">
+			<junitreport todir="${junit.report.dir}">
+				<fileset dir="${junit.report.dir}">
+					<include name="TEST-*.xml" />
+				</fileset>
+				<report format="frames" todir="${junit.report.dir}" />
+			</junitreport>
+		</target>
+	
 	<target name="fail-on-error" depends="test.instrumented" if="tests-failed">
 		<fail message="Some unit tests failed!" />
 	</target>
+	
 	
 	<target name="coverage.report" depends="instrument,test.instrumented">
 		<cobertura-report format="${cobertura.report.format}" destdir="${coverage.report.dir}" srcdir="${src.java}" datafile="cobertura.ser" />
@@ -120,7 +137,7 @@
 	</checkstyle>
 -->
 
-	<target name="findbugs" depends="init, compile">
+	<target name="findbugs" depends="init">
 		<findbugs home="${findbugs.dir}" output="xml" failOnError="true" outputfile="${findbugs.report.dir}/findbugs-report.xml">
 			<class location="${build.classes}" />
 			<auxClasspath refId="class.path" />
