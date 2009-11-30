@@ -24,7 +24,7 @@ The *BeanReaderRowMapper* can be used to map lines in a flat file into Java bean
 
 You can do this by explicitly supplying a map of column names to properties:
 {{{
-Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<String, String>();
         map.put("First Name", "firstName");
         map.put("Last Name", "lastName");
         ColumnMapping mappingStrategy = new HeaderColumnNameMapping(map);
