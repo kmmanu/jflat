@@ -1,5 +1,6 @@
 package com.tecacet.jflat.om;
 
+import java.util.Currency;
 import java.util.Date;
 
 public class Order {
@@ -10,6 +11,7 @@ public class Order {
     private double price;
     private Date date;
     private boolean active = false;
+    private Currency currency;
 
     public Order() {
 
@@ -61,6 +63,14 @@ public class Order {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
   

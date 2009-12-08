@@ -2,16 +2,26 @@ package com.tecacet.jflat.om;
 
 public class Customer {
 
-    private String name;
-    
+    private String lastName;
+
+    private String firstName;
+
     private int identifier;
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String name) {
+        this.lastName = name;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public int getIdentifier() {
@@ -21,6 +31,5 @@ public class Customer {
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
     }
-    
-    
+
 }
