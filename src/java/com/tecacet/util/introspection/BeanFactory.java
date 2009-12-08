@@ -9,5 +9,12 @@ package com.tecacet.util.introspection;
  */
 public interface BeanFactory {
 
+    /**
+     * Create a bean of the given type
+     * 
+     * @param type type of the bean
+     * @return
+     * @throws BeanCreationException if bean creation fails.
+     */
     Object createBean(Class type) throws BeanCreationException;
 }
