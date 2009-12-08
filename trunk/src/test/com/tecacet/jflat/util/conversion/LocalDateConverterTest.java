@@ -15,6 +15,13 @@ public class LocalDateConverterTest {
         LocalDate localDate = new LocalDate(1999, 2, 13);
         assertEquals(localDate, result);
     }
+    
+    @Test
+    public void testConvertWrongFormat() {
+        LocalDate result = (LocalDate) converter.convert(LocalDate.class, "02-13-1999");
+        LocalDate localDate = new LocalDate(1999, 2, 13);
+        assertEquals(localDate, result);
+    }
 
     @Test
     public void testGetDefaultType() {
