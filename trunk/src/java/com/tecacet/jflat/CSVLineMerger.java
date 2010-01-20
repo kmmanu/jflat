@@ -36,6 +36,7 @@ public class CSVLineMerger implements LineMerger {
     protected static final char DEFAULT_QUOTE_CHARACTER = '"';
 
     /** Default line terminator uses platform encoding. */
+    //TODO get from properties
     protected static final String DEFAULT_LINE_END = "\n";
 
     /** The quote constant to use when you wish to suppress all quoting. */
@@ -93,7 +94,7 @@ public class CSVLineMerger implements LineMerger {
                 sb.append(quotechar);
             }
         }
-
+        
         sb.append(lineEnd);
         return sb.toString();
     }

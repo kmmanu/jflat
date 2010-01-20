@@ -28,10 +28,17 @@ import java.util.Map;
  */
 public class HeaderColumnNameMapping implements ColumnMapping {
     protected String[] header;
-    private Map<String, String> columnMapping = null;
+    protected Map<String, String> columnMapping = null;
     
     private boolean trimWhiteSpace = false;
     private boolean convertToLowerCase = false;
+    
+    /**
+     * Empty protected constructor as a convenience for extending 
+     */
+    protected HeaderColumnNameMapping() {
+        
+    }
     
     public HeaderColumnNameMapping(Map<String, String> columnMapping) {
         this.columnMapping = columnMapping;

@@ -39,9 +39,16 @@ public class FlatFileWriter<T> {
 
     /**
      * RowMapper used to convert beans to tokens
+     * 
      */
     protected WriterRowMapper<T> rowMapper;
 
+    /**
+     * 
+     * @param writer
+     * @param merger
+     * @param mapper
+     */
     public FlatFileWriter(Writer writer, LineMerger merger, WriterRowMapper<T> mapper) {
         pw = new PrintWriter(writer);
         this.lineMeger = merger;

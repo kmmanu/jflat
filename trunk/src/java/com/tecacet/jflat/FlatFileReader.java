@@ -47,6 +47,7 @@ public class FlatFileReader<T> implements LineIterator {
 
     protected ReaderRowMapper<T> rowMapper;
 
+    @SuppressWarnings("unchecked")
     public FlatFileReader(Reader reader, LineParser parser) {
         this(reader, parser, new DefaultRowMapper());
     }
@@ -58,7 +59,7 @@ public class FlatFileReader<T> implements LineIterator {
         this.skipLines = DEFAULT_SKIP_LINES;
     }
 
-    protected FlatFileReader(Reader reader, ReaderRowMapper<T> mapper) {
+    public FlatFileReader(Reader reader, ReaderRowMapper<T> mapper) {
         this(reader, null, mapper);
     }
 
@@ -120,6 +121,7 @@ public class FlatFileReader<T> implements LineIterator {
      * @throws IOException
      *             if bad things happen during the read
      */
+    @Override
     public String getNextLine() throws IOException {
         return br.readLine();
     }

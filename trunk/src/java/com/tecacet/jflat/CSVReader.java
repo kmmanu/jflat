@@ -46,4 +46,5 @@ public class CSVReader<T> extends FlatFileReader<T> {
     public void setQuotechar(char quotechar) {
         ((CSVParser) lineParser).setQuotechar(quotechar);
     }
+
 }

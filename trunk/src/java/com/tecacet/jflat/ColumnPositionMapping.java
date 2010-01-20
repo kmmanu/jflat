@@ -28,6 +28,10 @@ public class ColumnPositionMapping implements ColumnMapping {
 
     protected Map<Integer, String> columnMapping;
 
+    protected ColumnPositionMapping() {
+        
+    }
+    
     /**
      * 
      * @param mapping

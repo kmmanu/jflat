@@ -20,9 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Parses a line into tokens based on a CSV separator. Uses a LineIterator to
- * access the next line if an entry spans multiple lines. This is possible for
- * values within quotes.
+ * Parses a line into tokens based on a CSV separator. Uses a LineIterator to access the next line if an entry spans
+ * multiple lines. This is possible for values within quotes.
  * 
  * @author Dimitri Papaioannou
  * 
@@ -33,8 +32,7 @@ public class CSVParser implements LineParser {
     private static final char DEFAULT_SEPARATOR = ',';
 
     /**
-     * The default quote character to use if none is supplied to the
-     * constructor.
+     * The default quote character to use if none is supplied to the constructor.
      */
     private static final char DEFAULT_QUOTE_CHARACTER = '"';
 
@@ -43,6 +41,10 @@ public class CSVParser implements LineParser {
     private char quotechar;
 
     private LineIterator lineIterator;
+
+    protected CSVParser() {
+
+    }
 
     public CSVParser(LineIterator lineIterator) {
         this.lineIterator = lineIterator;
@@ -93,11 +95,8 @@ public class CSVParser implements LineParser {
                         // a,bc"d"ef,g
                         if (i > 2 // not on the begining of the line
                                 && nextLine.charAt(i - 1) != this.separator // not
-                                // at the
-                                // begining
-                                // of an
-                                // escape
-                                // sequence
+                                // at the begining
+                                // of an escape sequence
                                 && nextLine.length() > (i + 1) && nextLine.charAt(i + 1) != this.separator // not
                         // at the end of an escape sequence
                         ) {
@@ -131,6 +130,14 @@ public class CSVParser implements LineParser {
 
     public void setQuotechar(char quotechar) {
         this.quotechar = quotechar;
+    }
+
+    public LineIterator getLineIterator() {
+        return lineIterator;
+    }
+
+    public void setLineIterator(LineIterator lineIterator) {
+        this.lineIterator = lineIterator;
     }
 
 }
