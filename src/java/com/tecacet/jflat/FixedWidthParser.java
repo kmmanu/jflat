@@ -27,6 +27,8 @@ public class FixedWidthParser implements LineParser {
 
     private int[] widths;
 
+    private boolean trimWhitespace = true;
+
     /**
      * 
      * @param widths
@@ -41,9 +43,20 @@ public class FixedWidthParser implements LineParser {
         String[] tokens = new String[widths.length];
         for (int i = 0; i < widths.length; i++) {
             tokens[i] = line.substring(lastIndex, lastIndex + widths[i]);
+            if (trimWhitespace) {
+                tokens[i] = tokens[i].trim();
+            }
             lastIndex += widths[i];
         }
         return tokens;
+    }
+
+    public boolean isTrimWhitespace() {
+        return trimWhitespace;
+    }
+
+    public void setTrimWhitespace(boolean trimWhitespace) {
+        this.trimWhitespace = trimWhitespace;
     }
 
 }
