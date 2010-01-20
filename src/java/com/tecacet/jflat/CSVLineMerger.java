@@ -30,14 +30,9 @@ public class CSVLineMerger implements LineMerger {
     protected static final char DEFAULT_SEPARATOR = ',';
 
     /**
-     * The default quote character to use if none is supplied to the
-     * constructor.
+     * The default quote character to use if none is supplied to the constructor.
      */
     protected static final char DEFAULT_QUOTE_CHARACTER = '"';
-
-    /** Default line terminator uses platform encoding. */
-    //TODO get from properties
-    protected static final String DEFAULT_LINE_END = "\n";
 
     /** The quote constant to use when you wish to suppress all quoting. */
     protected static final char NO_QUOTE_CHARACTER = '\u0000';
@@ -50,8 +45,6 @@ public class CSVLineMerger implements LineMerger {
 
     private char escapechar;
 
-    private String lineEnd;
-
     /**
      * Create a merger with the standard CSV attributes.
      */
@@ -59,7 +52,6 @@ public class CSVLineMerger implements LineMerger {
         separator = DEFAULT_SEPARATOR;
         quotechar = DEFAULT_QUOTE_CHARACTER;
         escapechar = DEFAULT_ESCAPE_CHARACTER;
-        lineEnd = DEFAULT_LINE_END;
     }
 
     public String makeLine(String[] nextLine) {
@@ -94,8 +86,6 @@ public class CSVLineMerger implements LineMerger {
                 sb.append(quotechar);
             }
         }
-        
-        sb.append(lineEnd);
         return sb.toString();
     }
 
@@ -121,14 +111,6 @@ public class CSVLineMerger implements LineMerger {
 
     public void setEscapechar(char escapechar) {
         this.escapechar = escapechar;
-    }
-
-    public String getLineEnd() {
-        return lineEnd;
-    }
-
-    public void setLineEnd(String lineEnd) {
-        this.lineEnd = lineEnd;
     }
 
 }

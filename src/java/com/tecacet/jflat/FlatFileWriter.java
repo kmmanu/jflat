@@ -29,6 +29,9 @@ import java.util.Collection;
  * @param <T>
  */
 public class FlatFileWriter<T> {
+    
+    protected static final String DEFAULT_LINE_END = System.getProperty("line.separator");
+
 
     private PrintWriter pw;
 
@@ -89,7 +92,7 @@ public class FlatFileWriter<T> {
      */
     public void writeNext(String line) {
         pw.write(line);
-
+        pw.write(DEFAULT_LINE_END);
     }
 
     /**

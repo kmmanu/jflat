@@ -16,7 +16,6 @@ public class FixedWidthFileMerger implements LineMerger {
         for (int width : widths) {
             sb.append("%" + width + "s");
         }
-        sb.append("\n"); //TODO get from properties
         return sb.toString();
     }
 
