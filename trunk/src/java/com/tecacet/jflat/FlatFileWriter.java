@@ -70,7 +70,6 @@ public class FlatFileWriter<T> {
             String[] nextLine = rowMapper.getRow(bean);
             writeNext(nextLine);
         }
-        close();
     }
 
     /**
