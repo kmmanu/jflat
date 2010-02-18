@@ -14,7 +14,8 @@ public class FixedWidthLineMerger implements LineMerger {
     private String buildFormat() {
         StringBuffer sb = new StringBuffer();
         for (int width : widths) {
-            sb.append("%" + width + "s");
+            String format = "%-" + width + "s"; //This means a left-justified string of <width> characters
+            sb.append(format);
         }
         return sb.toString();
     }
