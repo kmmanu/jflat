@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class FixedWidthFileMergerTest {
+public class FixedWidthLineMergerTest {
 
     @Test
     public void testMakeLine() {
-        FixedWidthFileMerger merger = new FixedWidthFileMerger(new int[] { 2, 5 });
+        FixedWidthLineMerger merger = new FixedWidthLineMerger(new int[] { 2, 5 });
         String line = merger.makeLine(new String[] { "a", "b" });
         assertEquals(" a    b",line);
     }

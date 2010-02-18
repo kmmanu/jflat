@@ -1,11 +1,11 @@
 package com.tecacet.jflat;
 
-public class FixedWidthFileMerger implements LineMerger {
+public class FixedWidthLineMerger implements LineMerger {
 
     private int[] widths;
     private String format;
 
-    public FixedWidthFileMerger(int[] widths) {
+    public FixedWidthLineMerger(int[] widths) {
         super();
         this.widths = widths;
         this.format = buildFormat();
