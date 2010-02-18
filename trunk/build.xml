@@ -1,19 +1,19 @@
 <project name="jflat" default="test" basedir=".">
 
-	<target name="compile">
+	<target name="compile" description="Compile source code.">
 		<ant antfile="build-code.xml" target="compile" />
 	</target>
 
-	<target name="test" depends="compile">
+	<target name="test" depends="compile" description="Run unit tests.">
 		<ant antfile="build-test.xml" target="test.report" />
 	</target>
 	
-	<target name="reports" depends="compile">
+	<target name="reports" depends="compile" description="Generate test reports.">
 		<ant antfile="build-reports.xml" target="reports">
 		</ant>
 	</target>
 	
-	<target name="dist" depends="compile">
+	<target name="dist" depends="compile" description="Make a distributable release.">
 		<ant antfile="build-dist.xml" target="dist" />
 	</target>
 		
