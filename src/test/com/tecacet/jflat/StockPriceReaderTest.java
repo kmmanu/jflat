@@ -51,6 +51,7 @@ public class StockPriceReaderTest {
         String[] header = new String[] { "Volume", "Average Price", "Date" };
         csvWriter.writeNext(header);
         csvWriter.writeAll(prices);
+        csvWriter.close();
 
         // create a normal file reader
         fr = new FileReader("test.out");
