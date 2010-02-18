@@ -18,7 +18,7 @@
 	</target>
 		
 
-	<target name="clean">
+	<target name="clean" description="Clean all build artifacts.">
 		<ant antfile="build-test.xml" target="clean" />
 		<ant antfile="build-code.xml" target="clean" />
 		<ant antfile="build-reports.xml" target="clean" />
