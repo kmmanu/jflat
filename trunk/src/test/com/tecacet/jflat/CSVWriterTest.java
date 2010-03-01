@@ -31,7 +31,7 @@ import org.junit.Test;
 public class CSVWriterTest {
 
     @Test
-    public void testWriteAll() throws IOException {
+    public void testWriteAll() throws IOException, LineMergerException {
         Writer w = new FileWriter("test.csv");
         CSVWriter<String[]> writer = new DefaultCSVWriter(w);
         List<String[]> lines = new ArrayList<String[]>();
@@ -49,7 +49,7 @@ public class CSVWriterTest {
     }
     
     @Test
-    public void testWriteAllWithHeader() throws IOException {
+    public void testWriteAllWithHeader() throws IOException, LineMergerException {
         Writer w = new FileWriter("test.csv");
         CSVWriter<String[]> writer = new DefaultCSVWriter(w);
         List<String[]> lines = new ArrayList<String[]>();

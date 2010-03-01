@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import com.tecacet.jflat.CSVLineMerger;
 import com.tecacet.jflat.FlatFileWriter;
 import com.tecacet.jflat.LineMerger;
+import com.tecacet.jflat.LineMergerException;
 
 /**
  * Writes a ResultSet to a Flat File
@@ -59,7 +60,7 @@ public class ResultSetFlatFileWriter<T> extends FlatFileWriter<T> {
      *            true if you want column names in the output, false otherwise
      * 
      */
-    public void writeAll(ResultSet rs) throws SQLException, IOException {
+    public void writeAll(ResultSet rs) throws SQLException, IOException, LineMergerException {
 
         ResultSetMetaData metadata = rs.getMetaData();
 
@@ -80,7 +81,7 @@ public class ResultSetFlatFileWriter<T> extends FlatFileWriter<T> {
         }
     }
 
-    protected void writeColumnNames(ResultSetMetaData metadata) throws SQLException {
+    protected void writeColumnNames(ResultSetMetaData metadata) throws SQLException, LineMergerException {
 
         int columnCount = metadata.getColumnCount();
 

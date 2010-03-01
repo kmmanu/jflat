@@ -29,6 +29,7 @@ public interface LineMerger {
      * Compose an array of String into a single output line
      * @param elements
      * @return
+     * @throws LineMergerException 
      */
-    String makeLine(String[] elements);
+    String makeLine(String[] elements) throws LineMergerException;
 }
