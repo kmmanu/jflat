@@ -32,7 +32,7 @@ public class FieldTooWideException extends LineMergerException {
     
     @Override
     public String getMessage(){
-        String messageFormat = "Value '%s' is too wide.  Actual width: %i, Maximum width: %i.";
+        String messageFormat = "Value '%s' is too wide.  Actual width: %d, Maximum width: %d.";
         String message = String.format( messageFormat, fieldValue, fieldValue.length(), maxFieldWidth);
         return message;
     }

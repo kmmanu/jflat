@@ -31,7 +31,7 @@ public class TooManyFieldsException extends LineMergerException {
     
     @Override
     public String getMessage(){
-        String message = String.format("Too many fields.  Got: %i, Maximum: %i.", fieldCount, maxFieldCount);
+        String message = String.format("Too many fields.  Got: %d, Maximum: %d.", fieldCount, maxFieldCount);
         return message;
     }
     
