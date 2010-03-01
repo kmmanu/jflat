@@ -23,6 +23,7 @@ import javax.swing.table.TableModel;
 import com.tecacet.jflat.CSVLineMerger;
 import com.tecacet.jflat.FlatFileWriter;
 import com.tecacet.jflat.LineMerger;
+import com.tecacet.jflat.LineMergerException;
 
 /**
  * Exports a Swing TableModel to a flat file.
@@ -46,7 +47,7 @@ public class TableModelFileWriter extends FlatFileWriter {
         super(writer, merger, null);
     }
 
-    public void writeTable(TableModel tableModel) {
+    public void writeTable(TableModel tableModel) throws LineMergerException {
         if (includeColumnNames) {
             writeColumnNames(tableModel);
         }
@@ -61,7 +62,7 @@ public class TableModelFileWriter extends FlatFileWriter {
         close();
     }
 
-    private void writeColumnNames(TableModel tableModel) {
+    private void writeColumnNames(TableModel tableModel) throws LineMergerException {
         String[] columns = new String[tableModel.getColumnCount()];
         for (int i = 0; i < tableModel.getColumnCount(); i++) {
             columns[i] = tableModel.getColumnName(i);

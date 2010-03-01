@@ -18,7 +18,7 @@ import com.tecacet.jflat.om.StockPrice;
 public class StockPriceReaderTest {
 
     @Test
-    public void testSimpleRead() throws IOException {
+    public void testSimpleRead() throws IOException, LineMergerException {
 
         // construct a bean row mapper for the LehmnaPrice object using the map
         ReaderRowMapper<StockPrice> rowMapper = new BeanReaderRowMapper<StockPrice>(StockPrice.class, new String[] {

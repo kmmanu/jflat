@@ -11,6 +11,12 @@ public class FixedWidthLineMerger implements LineMerger {
         this.format = buildFormat();
     }
 
+    @Override
+    public String makeLine(String[] elements) throws LineMergerException{
+        validateFields(elements);
+        return String.format(format, (Object[]) elements);
+    }
+
     private String buildFormat() {
         StringBuffer sb = new StringBuffer();
         for (int width : widths) {
@@ -20,8 +26,15 @@ public class FixedWidthLineMerger implements LineMerger {
         return sb.toString();
     }
 
-    @Override
-    public String makeLine(String[] elements) {
-        return String.format(format, (Object[])elements);
+    private void validateFields(String[] elements) throws LineMergerException {
+        if (elements.length > widths.length) {
+            throw new TooManyFieldsException(elements.length, widths.length);
+        }
+
+        for (int i = 0; i < elements.length; i++) {
+            if (elements[i].length() > widths[i]) {
+                throw new FieldTooWideException(elements[i], widths[i]);
+            }
+        }
     }
 }

@@ -9,10 +9,12 @@ import javax.swing.table.TableModel;
 
 import org.junit.Test;
 
+import com.tecacet.jflat.LineMergerException;
+
 public class TableModelFileWriterTest {
 
     @Test
-    public void testWriteTable() throws IOException {
+    public void testWriteTable() throws IOException, LineMergerException {
         TableModel tableModel =
             new DefaultTableModel(new Object[][] { 
                 { "Lore", "123", "Resting" }, 

@@ -65,7 +65,7 @@ public class FlatFileWriter<T> {
      *            a List of beans, each one representing a source of a line in
      *            the file.
      */
-    public void writeAll(Collection<T> beans) {
+    public void writeAll(Collection<T> beans) throws LineMergerException {
         for (T bean : beans) {
             String[] nextLine = rowMapper.getRow(bean);
             writeNext(nextLine);
@@ -79,7 +79,7 @@ public class FlatFileWriter<T> {
      *            a string array with string of tokens as a separate entry. Uses
      *            a LineMerger to compose the line
      */
-    public void writeNext(String[] line) {
+    public void writeNext(String[] line) throws LineMergerException{
         writeNext(lineMeger.makeLine(line));
     }
 
