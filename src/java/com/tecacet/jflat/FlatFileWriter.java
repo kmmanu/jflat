@@ -67,11 +67,21 @@ public class FlatFileWriter<T> {
      */
     public void writeAll(Collection<T> beans) throws LineMergerException {
         for (T bean : beans) {
-            String[] nextLine = rowMapper.getRow(bean);
-            writeNext(nextLine);
+            writeOne(bean);
         }
     }
 
+    /**
+     * Writes a single bean to a flat file.
+     * 
+     * @param beans
+     *            representing a source of a line in the file.
+     */
+    public void writeOne(T bean) throws LineMergerException {
+        String[] nextLine = rowMapper.getRow(bean);
+        writeNext(nextLine);
+    }
+    
     /**
      * Writes the next line to the file.
      * 
