@@ -24,5 +24,12 @@ public class FixedWidthLineMergerTest {
         FixedWidthLineMerger merger = new FixedWidthLineMerger(new int[] { 2, 5 });
         merger.makeLine(new String[] { "12", "123456"});
     }
+    
+    @Test
+    public void testNullFields() throws LineMergerException {
+        FixedWidthLineMerger merger = new FixedWidthLineMerger(new int[] { 1, 1, 1 });
+        String line = merger.makeLine(new String[] { "a", null, "c" });
+        assertEquals("a c", line);
+    }
 
 }

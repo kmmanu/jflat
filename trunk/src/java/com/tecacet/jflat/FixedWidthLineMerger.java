@@ -4,6 +4,7 @@ public class FixedWidthLineMerger implements LineMerger {
 
     private int[] widths;
     private String format;
+    private final String EMPTY_STRING = "";
 
     public FixedWidthLineMerger(int[] widths) {
         super();
@@ -13,6 +14,7 @@ public class FixedWidthLineMerger implements LineMerger {
 
     @Override
     public String makeLine(String[] elements) throws LineMergerException{
+        convertNullsToEmptyStrings(elements);
         validateFields(elements);
         return String.format(format, (Object[]) elements);
     }
@@ -32,9 +34,21 @@ public class FixedWidthLineMerger implements LineMerger {
         }
 
         for (int i = 0; i < elements.length; i++) {
+            if (elements[i] == null) {
+                continue; 
+            }
             if (elements[i].length() > widths[i]) {
                 throw new FieldTooWideException(elements[i], widths[i]);
             }
         }
     }
+    
+    private void convertNullsToEmptyStrings(String[] elements) {
+        for (int i = 0; i < elements.length; i++) {
+            if (elements[i] == null) {
+                elements[i] = EMPTY_STRING;
+            }
+        }
+    }
+       
 }
