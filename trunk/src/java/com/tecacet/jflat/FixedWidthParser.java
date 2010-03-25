@@ -25,9 +25,9 @@ import java.io.IOException;
  */
 public class FixedWidthParser implements LineParser {
 
-    private int[] widths;
+    protected int[] widths;
 
-    private boolean trimWhitespace = true;
+    protected boolean trimWhitespace = true;
 
     /**
      * 
