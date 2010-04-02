@@ -1,7 +1,0 @@
-#This is a comment
-
-#Another comment, preceeded by a blank line
-This is real data
-
-
-#Another comment, preceeded by two blank lines
