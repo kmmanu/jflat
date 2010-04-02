@@ -18,7 +18,6 @@ package com.tecacet.jflat;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -55,31 +54,5 @@ public class FlatFileReaderTest {
         assertEquals("L463", lines.get(0)[2]);
         assertEquals("0003752", lines.get(1)[1]);
     }
-    
-    @Test
-    public void testCommentsAndBlanksIgnored() throws IOException {
-        FileReader reader = new FileReader("testdata/commentsAndBlanks.txt");
-        LineParser lineParser = new SimpleLineParser();
-        FlatFileReader<String[]> flatReader = new FlatFileReader<String[]>(reader, lineParser);
-        List<String[]> lines = flatReader.readAll();
-        assertEquals("Got correct line count, when comments and blanks are ignored", 1, lines.size());
-    }
-    
-    @Test
-    public void testCommentsAndBlanksIncluded() throws IOException {
-        FileReader reader = new FileReader("testdata/commentsAndBlanks.txt");
-        LineParser lineParser = new SimpleLineParser();
-        FlatFileReader<String[]> flatReader = new FlatFileReader<String[]>(reader, lineParser);
-        flatReader.setCommentPrefix(null);
-        flatReader.setShouldSkipBlankLines(false);
-        List<String[]> lines = flatReader.readAll();
-        assertEquals("Got correct line count, when comments and blanks are included", 7, lines.size());
-    }
 
-    
-    class SimpleLineParser implements LineParser {
-        public String[] parseLine(String line) throws IOException { 
-            return new String[] {line}; 
-        }
-    }
 }

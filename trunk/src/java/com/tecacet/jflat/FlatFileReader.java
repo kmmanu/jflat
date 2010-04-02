@@ -41,26 +41,6 @@ public class FlatFileReader<T> implements LineIterator {
      */
     protected int skipLines;
 
-    /**
-     * The default comment prefix 
-     */
-    protected static final String DEFAULT_COMMENT_PREFIX = "#";
-    
-    /**
-     * Prefix string that indicates a comment in the file 
-     */
-    protected String commentPrefix;
-    
-    /**
-     * The default flag for skipping blank lines
-     */
-    protected static final boolean DEFAULT_SHOULD_SKIP_BLANK_LINES = true;
-    
-    /**
-     * Flag to indicate if blank lines should be skipped
-     */
-    protected boolean shouldSkipBlankLines;
-    
     protected BufferedReader br;
 
     protected LineParser lineParser;
@@ -77,8 +57,6 @@ public class FlatFileReader<T> implements LineIterator {
         this.lineParser = parser;
         this.rowMapper = mapper;
         this.skipLines = DEFAULT_SKIP_LINES;
-        this.commentPrefix = DEFAULT_COMMENT_PREFIX;
-        this.shouldSkipBlankLines = DEFAULT_SHOULD_SKIP_BLANK_LINES;
     }
 
     public FlatFileReader(Reader reader, ReaderRowMapper<T> mapper) {
@@ -129,32 +107,11 @@ public class FlatFileReader<T> implements LineIterator {
     }
 
     protected String[] readNext() throws IOException {
-        for(;;){
-            String line = getNextLine();
-            if (line == null) return null;
-            if (isComment(line)) continue;
-            if (isEmpty(line)) continue;
-            return lineParser.parseLine(line);
+        String line = getNextLine();
+        if (line == null) {
+            return null;
         }
-    }
-
-    private boolean isEmpty(String line) {
-        if(isShouldSkipBlankLines()){
-            return line.isEmpty();
-        }
-        else {
-            return false;
-        }
-    }
-
-    private boolean isComment(String line) {
-        String commentPrefix = getCommentPrefix();
-        if(commentPrefix != null && line.startsWith(commentPrefix)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return lineParser.parseLine(line);
     }
 
     /**
@@ -193,41 +150,6 @@ public class FlatFileReader<T> implements LineIterator {
      */
     public void close() throws IOException {
         br.close();
-    }
-
-    /**
-     * @return the commentPrefix
-     */
-    public String getCommentPrefix() {
-        return commentPrefix;
-    }
-
-    /**
-     * Sets the prefix string that indicates a comment.  The default is "#".
-     * Setting this to null means no lines will be considered as comments.
-     * 
-     * @param commentPrefix the commentPrefix to set
-     */
-    public void setCommentPrefix(String commentPrefix) {
-        this.commentPrefix = commentPrefix;
-    }
-
-    /**
-     * @return the shouldSkipBlankLines flag
-     */
-    public boolean isShouldSkipBlankLines() {
-        return shouldSkipBlankLines;
-    }
-
-    /**
-     * Sets the flag to determine if blank lines should be skipped.
-     * The default is true.  If set to false, blank lines will be
-     * read and parsed as regular data.
-     * 
-     * @param shouldSkipBlankLines the shouldSkipBlankLines to set
-     */
-    public void setShouldSkipBlankLines(boolean shouldSkipBlankLines) {
-        this.shouldSkipBlankLines = shouldSkipBlankLines;
     }
 
 }
