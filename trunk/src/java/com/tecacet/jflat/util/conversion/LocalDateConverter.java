@@ -14,6 +14,11 @@ public class LocalDateConverter extends AbstractConverter {
         dateConverter = new DateConverter();
         dateConverter.setPattern(dateFormatString);
     }
+    
+    public LocalDateConverter(String[] dateFormatStrings) {
+        dateConverter = new DateConverter();
+        dateConverter.setPatterns(dateFormatStrings);
+    }
 
     @SuppressWarnings("unchecked")
     @Override
