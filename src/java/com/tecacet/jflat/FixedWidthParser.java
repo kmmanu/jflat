@@ -42,10 +42,14 @@ public class FixedWidthParser implements LineParser {
         int lastIndex = 0;
         String[] tokens = new String[widths.length];
         for (int i = 0; i < widths.length; i++) {
-            tokens[i] = line.substring(lastIndex, lastIndex + widths[i]);
+        	String thisToken = line.substring(lastIndex, lastIndex + widths[i]);
             if (trimWhitespace) {
-                tokens[i] = tokens[i].trim();
+                thisToken = thisToken.trim();
             }
+            if (thisToken.length() == 0) {
+            	thisToken = null;
+            }
+            tokens[i] = thisToken;
             lastIndex += widths[i];
         }
         return tokens;
