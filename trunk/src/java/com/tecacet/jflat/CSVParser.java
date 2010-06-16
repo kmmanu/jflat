@@ -104,14 +104,18 @@ public class CSVParser implements LineParser {
                         }
                     }
                 } else if (c == separator && !inQuotes) {
-                    tokens.add(sb.toString());
-                    sb = new StringBuffer(); // start work on next token
+                	// an empty field equates to null
+                    tokens.add(sb.length() > 0 ? sb.toString() : null);
+                    
+                    // start work on next token, if there is one
+                    sb = new StringBuffer(); 
                 } else {
                     sb.append(c);
                 }
             }
         } while (inQuotes);
-        tokens.add(sb.toString());
+        // to account for final field...
+        tokens.add(sb.length() > 0 ? sb.toString() : null);
         return tokens.toArray(new String[0]);
 
     }

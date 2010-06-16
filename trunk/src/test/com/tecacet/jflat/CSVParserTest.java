@@ -22,29 +22,30 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-public class FixedWidthParserTest {
+public class CSVParserTest {
 
     @Test
     public void testParseLine() throws IOException {
-        FixedWidthParser parser = new FixedWidthParser(new int[] { 1, 9, 9 });
-        String line = "D000375204000013900";
+        CSVParser parser = new CSVParser(null);
+        String line = "foo,bar,baz";
         String[] tokens = parser.parseLine(line);
-        assertEquals("D", tokens[0]);
-        assertEquals("000375204", tokens[1]);
-        assertEquals("000013900", tokens[2]);
+        assertEquals(3, tokens.length);
+        assertEquals("foo", tokens[0]);
+        assertEquals("bar", tokens[1]);
+        assertEquals("baz", tokens[2]);
         
-        line = "H0000L463070123B";
-        parser = new FixedWidthParser(new int[] { 1, 4, 4 });
+        line = "  foo  ,  bar  ,  baz  ";
         tokens = parser.parseLine(line);
-        assertEquals("H", tokens[0]);
-        assertEquals("0000", tokens[1]);
-        assertEquals("L463", tokens[2]);
+        assertEquals(3, tokens.length);
+        assertEquals("  foo  ", tokens[0]);
+        assertEquals("  bar  ", tokens[1]);
+        assertEquals("  baz  ", tokens[2]);
          
-        line = "   XXX   ";
-        parser = new FixedWidthParser(new int[] {3,3,3});
+        line = ",bar,";
         tokens = parser.parseLine(line);
+        assertEquals(3, tokens.length);
         assertEquals(null, tokens[0]);
-        assertEquals("XXX", tokens[1]);
+        assertEquals("bar", tokens[1]);
         assertEquals(null, tokens[2]);
         
     }
