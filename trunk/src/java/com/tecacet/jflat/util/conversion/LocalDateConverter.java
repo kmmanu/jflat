@@ -37,6 +37,12 @@ public class LocalDateConverter extends AbstractConverter {
         return LocalDate.class;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    protected Object handleMissing(Class c) {
+        return null;
+    }
+    
     private boolean isEmpty(String s) {
         if (s == null) {
             return true;
