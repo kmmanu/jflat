@@ -40,6 +40,12 @@ public class LocalDateConverterTest {
         }
 
     }
+    
+    @Test
+    public void testConvertNull() {
+        LocalDate result = (LocalDate) converter.convert(LocalDate.class, null);
+        assertEquals(null, result);
+    }
 
     @Test
     public void testGetDefaultType() {
