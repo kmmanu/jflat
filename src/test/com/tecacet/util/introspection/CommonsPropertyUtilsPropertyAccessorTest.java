@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
+import com.tecacet.util.introspection.commons.CommonsPropertyUtilsPropertyAccessor;
+
 public class CommonsPropertyUtilsPropertyAccessorTest {
 
     PropertyAccessor<Order> accessor = new CommonsPropertyUtilsPropertyAccessor<Order>();
