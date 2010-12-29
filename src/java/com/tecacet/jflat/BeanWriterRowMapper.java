@@ -18,8 +18,9 @@ package com.tecacet.jflat;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tecacet.util.introspection.CommonsBeanUtilsPropertyAccessor;
+import com.tecacet.jflat.util.conversion.ToStringConverter;
 import com.tecacet.util.introspection.PropertyAccessor;
+import com.tecacet.util.introspection.commons.CommonsBeanUtilsPropertyAccessor;
 
 /**
  * Basic implementation of WriterRowMapper that uses a columnMapping to
@@ -35,6 +36,7 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
     private ColumnMapping columnMapping;
     private PropertyAccessor<T> propertyAccessor;
     private Map<String, ValueExtractor<T>> extractors = new HashMap<String, ValueExtractor<T>>();
+    private Map<Class, ToStringConverter> converters = new HashMap<Class, ToStringConverter>();
 
     public BeanWriterRowMapper(ColumnMapping columnMapping, PropertyAccessor<T> propertyAccessor) {
         this.columnMapping = columnMapping;
@@ -58,7 +60,7 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
             }
             ValueExtractor<T> extractor = extractors.get(property);
             if (extractor == null) {
-                row[i] = (String) propertyAccessor.getProperty(bean, property);
+                row[i] = toString(propertyAccessor.getProperty(bean, property));
             } else {
                 row[i] = extractor.getValue(bean);
             }
@@ -66,6 +68,17 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
         return row;
     }
 
+    private String toString(Object o) {
+        if (o == null || o instanceof String) {
+            return (String)o;
+        }
+        ToStringConverter converter = converters.get(o.getClass());
+        if (converter != null) {
+            return converter.convertToString(o);
+        }
+        return o.toString(); 
+    }
+    
     public ColumnMapping getColumnMapping() {
         return columnMapping;
     }
@@ -80,6 +93,14 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
 
     public void deregisterValueExtractor(String property) {
         extractors.remove(property);
+    }
+    
+    public void registerConverted(Class type, ToStringConverter converter) {
+        converters.put(type, converter);
+    }
+
+    public void deregisterConverter(Class type) {
+        converters.remove(type);
     }
 
 }
