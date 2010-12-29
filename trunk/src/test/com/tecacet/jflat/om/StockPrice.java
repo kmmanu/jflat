@@ -6,7 +6,7 @@ public class StockPrice {
     private Date date;
     private double openPrice;
     private double closePrice;
-    private int volume;
+    private long volume;
 
     public Date getDate() {
         return date;
@@ -32,11 +32,11 @@ public class StockPrice {
         this.closePrice = closePrice;
     }
 
-    public int getVolume() {
+    public long getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(long volume) {
         this.volume = volume;
     }
 

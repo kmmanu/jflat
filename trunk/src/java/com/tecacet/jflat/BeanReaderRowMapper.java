@@ -19,9 +19,9 @@ package com.tecacet.jflat;
 import java.util.Map;
 
 import com.tecacet.util.introspection.BeanFactory;
-import com.tecacet.util.introspection.CommonsBeanUtilsPropertyAccessor;
 import com.tecacet.util.introspection.DefaultBeanFactory;
 import com.tecacet.util.introspection.PropertyAccessor;
+import com.tecacet.util.introspection.commons.CommonsBeanUtilsPropertyAccessor;
 
 /**
  * Basic implementation of ReaderRowMapper that uses a columnMapping to determine properties to map and a
