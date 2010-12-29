@@ -12,6 +12,8 @@ import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 
+import com.tecacet.util.introspection.commons.CommonsBeanUtilsPropertyAccessor;
+
 public class CommonsBeanUtilsPropertyAccessorTest extends TestCase {
 
     CommonsBeanUtilsPropertyAccessor<Order> accessor = new CommonsBeanUtilsPropertyAccessor<Order>();
