@@ -1,4 +1,4 @@
-package com.tecacet.jflat.util.conversion;
+package com.tecacet.util.conversion;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,6 @@ public class SmartStringConverter extends AbstractConverter {
         registry.remove(type);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected Object convertToType(Class clazz, Object value) throws Throwable {
         return convertToString(value);
@@ -54,8 +53,7 @@ public class SmartStringConverter extends AbstractConverter {
         }
         return value.toString();
     }
-
-    @SuppressWarnings("unchecked")
+    
     @Override
     protected Class getDefaultType() {
         return String.class;

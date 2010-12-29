@@ -13,8 +13,8 @@ import org.apache.commons.beanutils.converters.DateConverter;
 import org.junit.Test;
 
 import com.tecacet.jflat.om.StockPrice;
-import com.tecacet.jflat.util.conversion.ConverterPropertyEditor;
-import com.tecacet.jflat.util.conversion.DateToStringConverter;
+import com.tecacet.util.conversion.ConverterPropertyEditor;
+import com.tecacet.util.conversion.DateToStringConverter;
 import com.tecacet.util.introspection.spring.SpringBeanWrapperPropertyAccessor;
 
 public class SpringStockPriceReaderTest {

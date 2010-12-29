@@ -1,6 +1,6 @@
-package com.tecacet.jflat.util.conversion;
+package com.tecacet.util.conversion;
 
-import com.tecacet.jflat.util.conversion.ToStringConverter;
+import com.tecacet.util.conversion.ToStringConverter;
 
 public class DoubleToStringConverter implements ToStringConverter<Double> {
 

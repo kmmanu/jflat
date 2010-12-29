@@ -1,4 +1,4 @@
-package com.tecacet.jflat.util.conversion;
+package com.tecacet.util.conversion;
 
 /**
  * Type converter that converts a type to String.

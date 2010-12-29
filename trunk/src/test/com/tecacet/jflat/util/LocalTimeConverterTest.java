@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.joda.time.LocalTime;
 import org.junit.Test;
 
-import com.tecacet.jflat.util.conversion.LocalTimeConverter;
+import com.tecacet.util.conversion.LocalTimeConverter;
 
 public class LocalTimeConverterTest {
 

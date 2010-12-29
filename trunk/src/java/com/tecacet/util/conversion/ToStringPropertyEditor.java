@@ -1,4 +1,4 @@
-package com.tecacet.jflat.util.conversion;
+package com.tecacet.util.conversion;
 
 import java.beans.PropertyEditorSupport;
 

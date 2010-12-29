@@ -1,4 +1,4 @@
-package com.tecacet.jflat.util.conversion;
+package com.tecacet.util.conversion;
 
 import java.util.Date;
 
@@ -14,13 +14,12 @@ public class LocalDateConverter extends AbstractConverter {
         dateConverter = new DateConverter();
         dateConverter.setPattern(dateFormatString);
     }
-    
+
     public LocalDateConverter(String[] dateFormatStrings) {
         dateConverter = new DateConverter();
         dateConverter.setPatterns(dateFormatStrings);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected Object convertToType(Class type, Object o) {
         String value = (String) o;
@@ -31,18 +30,16 @@ public class LocalDateConverter extends AbstractConverter {
         return new LocalDate(date);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected Class getDefaultType() {
         return LocalDate.class;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     protected Object handleMissing(Class c) {
         return null;
     }
-    
+
     private boolean isEmpty(String s) {
         if (s == null) {
             return true;
