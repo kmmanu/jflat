@@ -1,16 +1,33 @@
 package com.tecacet.util.introspection.spring;
 
-import org.springframework.beans.BeanWrapperImpl;
+import java.util.Map;
 
+import org.apache.commons.beanutils.Converter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.NotWritablePropertyException;
+
+import com.tecacet.jflat.util.conversion.ConverterPropertyEditor;
+import com.tecacet.jflat.util.conversion.ConverterRegistry;
 import com.tecacet.util.introspection.BeanIntrospectorException;
 import com.tecacet.util.introspection.PropertyAccessor;
+import com.tecacet.util.introspection.commons.GenericConverterRegistry;
 
 public class SpringBeanWrapperPropertyAccessor<T> implements PropertyAccessor<T> {
 
+	private final Log log = LogFactory.getLog(this.getClass());
+	
     private final BeanWrapperImpl beanWrapper = new BeanWrapperImpl();
+    private boolean skipInvalidProperties = true;
 
     public SpringBeanWrapperPropertyAccessor() {
         beanWrapper.setAutoGrowNestedPaths(true);
+        ConverterRegistry converterRegistry = GenericConverterRegistry.getInstance();
+        Map<Class, Converter> converters = converterRegistry.getRegisteredConverters();
+        for (Map.Entry<Class, Converter> entry : converters.entrySet()) {
+        	beanWrapper.registerCustomEditor(entry.getKey(), new ConverterPropertyEditor(entry.getKey(), entry.getValue()));
+        }
     }
 
     @Override
@@ -22,12 +39,29 @@ public class SpringBeanWrapperPropertyAccessor<T> implements PropertyAccessor<T>
     @Override
     public void setProperty(T bean, String propertyName, Object value) throws BeanIntrospectorException {
         beanWrapper.setWrappedInstance(bean);
+        try {
         beanWrapper.setPropertyValue(propertyName, value);
+        } catch (NotWritablePropertyException e) {
+        	if (skipInvalidProperties) {
+        		log.debug(e.getMessage());
+        	} else {
+        		throw e;
+        	}
+        	
+        }
     }
 
     // TODO temporary
     public BeanWrapperImpl getBeanWrapper() {
         return beanWrapper;
     }
+
+	public boolean isSkipInvalidProperties() {
+		return skipInvalidProperties;
+	}
+
+	public void setSkipInvalidProperties(boolean skipInvalidProperties) {
+		this.skipInvalidProperties = skipInvalidProperties;
+	}
 
 }
