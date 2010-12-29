@@ -18,7 +18,7 @@ package com.tecacet.jflat;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tecacet.jflat.util.conversion.ToStringConverter;
+import com.tecacet.util.conversion.ToStringConverter;
 import com.tecacet.util.introspection.PropertyAccessor;
 import com.tecacet.util.introspection.commons.CommonsBeanUtilsPropertyAccessor;
 

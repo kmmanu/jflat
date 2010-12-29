@@ -1,9 +1,11 @@
-package com.tecacet.jflat.util.conversion;
+package com.tecacet.util.conversion;
 
 import static org.junit.Assert.*;
 
 import org.joda.time.LocalDate;
 import org.junit.Test;
+
+import com.tecacet.util.conversion.LocalDateToStringConverter;
 
 public class LocalDateToStringConverterTest {
 

@@ -1,11 +1,10 @@
-package com.tecacet.util.introspection.commons;
+package com.tecacet.util.conversion;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.beanutils.Converter;
 
-import com.tecacet.jflat.util.conversion.ConverterRegistry;
 
 public class GenericConverterRegistry implements ConverterRegistry {
 

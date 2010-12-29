@@ -1,8 +1,10 @@
-package com.tecacet.jflat.util.conversion;
+package com.tecacet.util.conversion;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import com.tecacet.util.conversion.BooleanToStringConverter;
 
 public class BooleanToStringConverterTest {
 

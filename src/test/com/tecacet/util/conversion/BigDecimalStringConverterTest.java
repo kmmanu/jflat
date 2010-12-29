@@ -1,10 +1,10 @@
-package com.tecacet.jflat.util.conversion;
+package com.tecacet.util.conversion;
 
 import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import com.tecacet.jflat.util.conversion.BigDecimalToStringConverter;
+import com.tecacet.util.conversion.BigDecimalToStringConverter;
 
 public class BigDecimalStringConverterTest {
 

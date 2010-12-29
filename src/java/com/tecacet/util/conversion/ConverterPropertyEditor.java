@@ -1,4 +1,4 @@
-package com.tecacet.jflat.util.conversion;
+package com.tecacet.util.conversion;
 
 import java.beans.PropertyEditorSupport;
 
@@ -13,6 +13,16 @@ public class ConverterPropertyEditor extends PropertyEditorSupport {
         super();
         this.type = type;
         this.converter = converter;
+    }
+    
+    @Override
+    public void setValue(Object value) {
+        //TODO I need some generic way to handle defaults
+        if (type.isAssignableFrom(boolean.class) && value == null) {
+            super.setValue(false);
+        } else {
+            super.setValue(value);
+        }
     }
 
     @Override
