@@ -17,7 +17,7 @@ public class ConverterPropertyEditor extends PropertyEditorSupport {
     
     @Override
     public void setValue(Object value) {
-        //TODO I need some generic way to handle defaults
+        //TODO I need some generic way to handle primitive defaults
         if (type.isAssignableFrom(boolean.class) && value == null) {
             super.setValue(false);
         } else {
