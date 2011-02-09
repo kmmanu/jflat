@@ -7,6 +7,7 @@
 	
 	<target name="init">
 		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${dependency.dir}" />
 	</target>
 
 	<target name="clean">
@@ -21,11 +22,26 @@
 	<!-- DOCS -->
 	<target name="docs" depends="init">
 		<mkdir dir="${dist.apidocs}" />
-		<javadoc packagenames="${packagename}.*" sourcepath="${src.java}" destdir="${dist.apidocs}" author="${javadoc.author}" version="${javadoc.version}" use="${javadoc.use}" private="${javadoc.private}" windowtitle="${project.name} API" doctitle="${project.name} ${project.version}">
+		<javadoc packagenames="${packagename}.*" 
+			sourcepath="${src.java}" destdir="${dist.apidocs}"
+			author="${javadoc.author}" version="${javadoc.version}" 
+			use="${javadoc.use}" 
+			private="${javadoc.private}" 
+			linksource="true"
+			windowtitle="${project.name} API" 
+			doctitle="${project.name} ${project.version}">
 			<classpath refid="class.path" />
 		</javadoc>
 	</target>
 
 	<!-- DIST -->
-	<target name="dist" description="Build jar file and documentation in the dist directory" depends="jar,docs" />
+	<target name="dist" description="Build jar file and documentation in the dist directory" depends="jar,docs">
+		<copy todir="${dist.dir}"> 
+			<fileset dir="${doc.dir}"/>
+		</copy>
+		<copy todir="${dependency.dir}">
+			<fileset dir="${lib.dir}"/>
+		</copy>
+		<zip basedir="${dist.dir}" destfile="${project.name}-${project.version}.zip" />
+	</target>
 </project>
