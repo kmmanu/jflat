@@ -8,11 +8,6 @@
 		<ant antfile="build-test.xml" target="test.report" />
 	</target>
 	
-	<target name="reports" depends="compile" description="Generate test reports.">
-		<ant antfile="build-reports.xml" target="reports">
-		</ant>
-	</target>
-	
 	<target name="dist" depends="compile" description="Make a distributable release.">
 		<ant antfile="build-dist.xml" target="dist" />
 	</target>
@@ -21,7 +16,6 @@
 	<target name="clean" description="Clean all build artifacts.">
 		<ant antfile="build-test.xml" target="clean" />
 		<ant antfile="build-code.xml" target="clean" />
-		<ant antfile="build-reports.xml" target="clean" />
 		<ant antfile="build-dist.xml" target="clean" />
 	</target>
 
