@@ -24,20 +24,20 @@ package com.tecacet.jflat;
 public class CSVLineMerger implements LineMerger {
 
     /** The character used for escaping quotes. */
-    protected static final char DEFAULT_ESCAPE_CHARACTER = '"';
+    public static final char DEFAULT_ESCAPE_CHARACTER = '"';
 
     /** The default separator to use if none is supplied to the constructor. */
-    protected static final char DEFAULT_SEPARATOR = ',';
+    public static final char DEFAULT_SEPARATOR = ',';
 
     /**
      * The default quote character to use if none is supplied to the constructor.
      */
-    protected static final char DEFAULT_QUOTE_CHARACTER = '"';
+    public static final char DEFAULT_QUOTE_CHARACTER = '"';
 
     /** The quote constant to use when you wish to suppress all quoting. */
-    protected static final char NO_QUOTE_CHARACTER = '\u0000';
+    public static final char NO_QUOTE_CHARACTER = '\u0000';
     /** The escape constant to use when you wish to suppress all escaping. */
-    protected static final char NO_ESCAPE_CHARACTER = '\u0000';
+    public static final char NO_ESCAPE_CHARACTER = '\u0000';
 
     private char separator;
 
