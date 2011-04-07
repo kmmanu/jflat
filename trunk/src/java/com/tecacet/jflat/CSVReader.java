@@ -28,7 +28,7 @@ public class CSVReader<T> extends FlatFileReader<T> {
 
     public CSVReader(Reader reader, ReaderRowMapper<T> mapper) {
         super(reader, mapper);
-        lineParser = new CSVParser(this);
+        lineParser = new CSVParser(lineIterator);
     }
 
     public char getSeparator() {

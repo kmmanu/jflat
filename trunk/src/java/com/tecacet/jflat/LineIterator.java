@@ -25,5 +25,14 @@ import java.io.IOException;
  */
 public interface LineIterator {
 
+	/**
+     * Reads the next line from the file.
+     * 
+     * @return the next line from the file without trailing newline
+     * @throws IOException
+     *             if bad things happen during the read
+     */
     String getNextLine() throws IOException;
+
+	void close() throws IOException;
 }
