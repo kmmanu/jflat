@@ -31,7 +31,7 @@ public class AsyncFlatFileReader<T> extends FlatFileReader<T> {
 		super.readWithCallback(callback);
 		executor.shutdown();
 		try {
-			executor.awaitTermination(10, TimeUnit.MINUTES);
+			executor.awaitTermination(10, TimeUnit.HOURS);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
