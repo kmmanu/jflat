@@ -1,10 +1,25 @@
+/*
+ Copyright 2008 TecAceT Ltd.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 package com.tecacet.util.introspection;
 
 /**
- *  Abstraction for creating beans
+ * Abstraction for creating beans
  * 
  * @author Dimitri Papaioannou
- *
+ * 
  * @param <T>
  */
 public interface BeanFactory {
@@ -12,9 +27,11 @@ public interface BeanFactory {
     /**
      * Create a bean of the given type
      * 
-     * @param type type of the bean
+     * @param type
+     *            type of the bean
      * @return
-     * @throws BeanCreationException if bean creation fails.
+     * @throws BeanCreationException
+     *             if bean creation fails.
      */
-    Object createBean(Class type) throws BeanCreationException;
+    Object createBean(Class<?> type) throws BeanCreationException;
 }

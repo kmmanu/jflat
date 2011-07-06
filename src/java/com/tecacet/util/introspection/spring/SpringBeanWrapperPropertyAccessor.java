@@ -14,6 +14,13 @@ import com.tecacet.util.conversion.GenericConverterRegistry;
 import com.tecacet.util.introspection.BeanIntrospectorException;
 import com.tecacet.util.introspection.PropertyAccessor;
 
+/**
+ * Implementation of property accessor that uses Spring's BeanWrapper
+ * 
+ * @author dimitri
+ *
+ * @param <T>
+ */
 public class SpringBeanWrapperPropertyAccessor<T> implements PropertyAccessor<T> {
 
     private final Log log = LogFactory.getLog(this.getClass());

@@ -17,7 +17,7 @@ public class DefaultBeanFactoryTest {
     public void testCreateBeanFails()  {
         DefaultBeanFactory factory = new DefaultBeanFactory();
         try {
-            TightBean bean = (TightBean) factory.createBean(TightBean.class);
+            SmallBean bean = (SmallBean) factory.createBean(SmallBean.class);
             fail();
         } catch (BeanCreationException e) {
            assertEquals(InstantiationException.class, e.getCause().getClass());

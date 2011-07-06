@@ -1,11 +1,11 @@
 package com.tecacet.util.introspection;
 
-public class TightBean {
+public class SmallBean {
 
     private String name;
     private int number;
 
-    public TightBean(String name, int number) {
+    public SmallBean(String name, int number) {
         super();
         this.name = name;
         this.number = number;
