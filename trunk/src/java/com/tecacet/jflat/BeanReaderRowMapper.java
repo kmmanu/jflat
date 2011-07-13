@@ -19,6 +19,7 @@ package com.tecacet.jflat;
 import java.util.Map;
 
 import com.tecacet.util.introspection.BeanFactory;
+import com.tecacet.util.introspection.BeanIntrospectorException;
 import com.tecacet.util.introspection.DefaultBeanFactory;
 import com.tecacet.util.introspection.PropertyAccessor;
 
@@ -86,7 +87,7 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public T getRow(String[] row, int rowNumber) {
+    public T getRow(String[] row, int rowNumber) throws BeanIntrospectorException {
         if (rowNumber == headerRow) {
             if (columnMapping.requiresHeaderRow()) {
                 columnMapping.setHeaderRow(row);
