@@ -95,7 +95,7 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
         extractors.remove(property);
     }
     
-    public void registerConverted(Class type, ToStringConverter converter) {
+    public void registerConverter(Class type, ToStringConverter converter) {
         converters.put(type, converter);
     }
 

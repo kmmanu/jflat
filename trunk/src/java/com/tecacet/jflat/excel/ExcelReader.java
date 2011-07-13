@@ -30,7 +30,7 @@ import com.tecacet.jflat.FlatFileReaderCallback;
 import com.tecacet.jflat.ReaderRowMapper;
 
 /**
- * Reads a flat file into a collection of beans. It uses a LineParser to parse
+ * Reads an excel file into a collection of beans. It uses a LineParser to parse
  * each line into tokens and a ReaderRowMapper to convert the tokens to beans.
  * 
  * @author Dimitri Papaioannou
