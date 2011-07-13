@@ -6,6 +6,7 @@ import org.apache.commons.beanutils.Converter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.MethodInvocationException;
 import org.springframework.beans.NotWritablePropertyException;
 
 import com.tecacet.util.conversion.ConverterPropertyEditor;
@@ -49,6 +50,8 @@ public class SpringBeanWrapperPropertyAccessor<T> implements PropertyAccessor<T>
         beanWrapper.setWrappedInstance(bean);
         try {
             beanWrapper.setPropertyValue(propertyName, value);
+        } catch (MethodInvocationException mie) {
+            throw new BeanIntrospectorException(mie);
         } catch (NotWritablePropertyException e) {
             if (skipInvalidProperties) {
                 log.debug(e.getMessage());
