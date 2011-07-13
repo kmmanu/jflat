@@ -54,7 +54,7 @@ public class SpringStockPriceReaderTest {
 
         BeanWriterRowMapper<StockPrice> rowMapper2 = new BeanWriterRowMapper<StockPrice>(columnMapping2,
                 propertyAccessor);
-        rowMapper2.registerConverted(Date.class, new DateToStringConverter("dd-MM-yyyy"));
+        rowMapper2.registerConverter(Date.class, new DateToStringConverter("dd-MM-yyyy"));
         FlatFileWriter<StockPrice> csvWriter = new FlatFileWriter<StockPrice>(fw, new CSVLineMerger(), rowMapper2);
         String[] header = new String[] { "Volume", "Average Price", "Date" };
         csvWriter.writeNext(header);
