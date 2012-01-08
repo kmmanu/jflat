@@ -10,6 +10,6 @@
 	<classpathentry kind="lib" path="lib/org.springframework.core-3.0.5.RELEASE.jar" sourcepath="lib/org.springframework.core-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/joda-time-1.6.jar"/>
-	<classpathentry kind="lib" path="lib/jxl.jar"/>
+	<classpathentry kind="lib" path="lib/jxl.2_6_12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
