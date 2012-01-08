@@ -37,7 +37,7 @@ public class SpringStockPriceReaderTest {
         // create a normal file reader
         FileReader fr = new FileReader("testdata/prices.csv");
         // finally a CSV reader
-        FlatFileReader<StockPrice> csvReader = new CSVReader<StockPrice>(fr, rowMapper);
+        com.tecacet.jflat.StructuredFileReader<StockPrice> csvReader = new CSVReader<StockPrice>(fr, rowMapper);
 
         // read all the prices
         List<StockPrice> prices = csvReader.readAll();

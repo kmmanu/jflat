@@ -26,6 +26,7 @@ import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
 import com.tecacet.jflat.DefaultRowMapper;
+import com.tecacet.jflat.StructuredFileReader;
 import com.tecacet.jflat.FlatFileReaderCallback;
 import com.tecacet.jflat.ReaderRowMapper;
 
@@ -37,7 +38,7 @@ import com.tecacet.jflat.ReaderRowMapper;
  * 
  * @param <T>
  */
-public class ExcelReader<T> {
+public class ExcelReader<T> implements StructuredFileReader<T>{
 
     /**
      * The default line to start reading.

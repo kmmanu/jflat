@@ -29,7 +29,7 @@ import java.util.List;
  * 
  * @param <T>
  */
-public class FlatFileReader<T> {
+public class FlatFileReader<T> implements StructuredFileReader<T> {
 
 	protected LineIterator lineIterator;
 
@@ -65,13 +65,11 @@ public class FlatFileReader<T> {
 		this(reader, null, mapper);
 	}
 
-	/**
-	 * Navigate the flat file and invoke the callback for each row.
-	 * 
-	 * @param callback
-	 * @throws IOException
-	 */
-	public void readWithCallback(FlatFileReaderCallback<T> callback)
+	/* (non-Javadoc)
+     * @see com.tecacet.jflat.FileReader#readWithCallback(com.tecacet.jflat.FlatFileReaderCallback)
+     */
+	@Override
+    public void readWithCallback(FlatFileReaderCallback<T> callback)
 			throws IOException {
 		for (int i = 0; i < skipLines; i++) {
 			lineIterator.getNextLine();
@@ -89,17 +87,11 @@ public class FlatFileReader<T> {
 		callback.processRow(row, nextLineAsTokens, bean);
 	}
 
-	/**
-	 * Reads the entire file into a List. Each element is a bean of type T
-	 * produced by the RowMapper
-	 * 
-	 * @return a List of String[], with each String[] representing a line of the
-	 *         file.
-	 * 
-	 * @throws IOException
-	 *             if bad things happen during the read
-	 */
-	public List<T> readAll() throws IOException {
+	/* (non-Javadoc)
+     * @see com.tecacet.jflat.FileReader#readAll()
+     */
+	@Override
+    public List<T> readAll() throws IOException {
 		final List<T> allElements = new ArrayList<T>();
 		readWithCallback(new FlatFileReaderCallback<T>() {
 

@@ -48,7 +48,7 @@ public class FlatFileReaderTest {
 
         };
         FileReader reader = new FileReader("testdata/ffwheaderAndFooter.txt");
-        FlatFileReader<String[]> flatReader = new FlatFileReader<String[]>(reader, lineParser, mapper);
+        com.tecacet.jflat.StructuredFileReader<String[]> flatReader = new FlatFileReader<String[]>(reader, lineParser, mapper);
         List<String[]> lines = flatReader.readAll();
         assertEquals(2, lines.size());
         assertEquals("L463", lines.get(0)[2]);
