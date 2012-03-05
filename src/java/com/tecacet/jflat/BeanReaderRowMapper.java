@@ -26,8 +26,9 @@ import com.tecacet.util.introspection.PropertyAccessor;
 import com.tecacet.util.introspection.spring.SpringBeanWrapperPropertyAccessor;
 
 /**
- * Basic implementation of ReaderRowMapper that uses a columnMapping to determine properties to map and a
- * BeanManipulator to set/get the bean properties.
+ * Basic implementation of ReaderRowMapper that uses a columnMapping to
+ * determine properties to map and a BeanManipulator to set/get the bean
+ * properties.
  * 
  * @author Dimitri Papaioannou
  * 
@@ -35,7 +36,7 @@ import com.tecacet.util.introspection.spring.SpringBeanWrapperPropertyAccessor;
  */
 public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
 
-    private int headerRow = 1;
+    private final int headerRow;
 
     private ColumnMapping columnMapping;
     private PropertyAccessor<T> propertyAccessor;
@@ -43,8 +44,9 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
     private Class<T> type;
 
     /**
-     * Construct a rowMapper using a BeanManipulator to create beans and populate properties and a column mapping to
-     * determine which properties to map to columns
+     * Construct a rowMapper using a BeanManipulator to create beans and
+     * populate properties and a column mapping to determine which properties to
+     * map to columns
      * 
      * @param beanManipulator
      * @param columnMapping
@@ -53,11 +55,19 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
         this.columnMapping = columnMapping;
         this.propertyAccessor = propertyAccessor;
         this.type = type;
+        this.headerRow = 1;
+    }
+    
+    public BeanReaderRowMapper(Class<T> type, PropertyAccessor<T> propertyAccessor, ColumnMapping columnMapping, int headerRow) {
+        this.columnMapping = columnMapping;
+        this.propertyAccessor = propertyAccessor;
+        this.type = type;
+        this.headerRow = headerRow;
     }
 
     /**
-     * Construct a rowMapper using a the default BeanManipulator and a column mapping to determine which properties to
-     * map to columns
+     * Construct a rowMapper using a the default BeanManipulator and a column
+     * mapping to determine which properties to map to columns
      * 
      * @param type
      * @param columnMapping
@@ -67,7 +77,8 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
     }
 
     /**
-     * Construct a rowMapper using a the default BeanManipulator The mapping strategy is HeaderColumnNameMapping.
+     * Construct a rowMapper using a the default BeanManipulator The mapping
+     * strategy is HeaderColumnNameMapping.
      * 
      * @param type
      * @param map
@@ -82,8 +93,9 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
     }
 
     /**
-     * Returns a bean constructed and populated using the BeanManipulator. WARNING: This implementation returns null for
-     * the header row if the ColumnMapping requires a header row.
+     * Returns a bean constructed and populated using the BeanManipulator.
+     * WARNING: This implementation returns null for the header row if the
+     * ColumnMapping requires a header row.
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -99,7 +111,7 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
             String property = columnMapping.getProperty(i);
             if (property == null) {
                 continue;
-            }                                                                                                 
+            }
             propertyAccessor.setProperty(bean, property, row[i]);
         }
         return bean;
@@ -115,10 +127,6 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
 
     public int getHeaderRow() {
         return headerRow;
-    }
-
-    public void setHeaderRow(int headerRow) {
-        this.headerRow = headerRow;
     }
 
     public BeanFactory getBeanFactory() {
