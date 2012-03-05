@@ -31,114 +31,111 @@ import java.util.List;
  */
 public class FlatFileReader<T> implements StructuredFileReader<T> {
 
-	protected LineIterator lineIterator;
+    protected LineIterator lineIterator;
 
-	/**
-	 * The default line to start reading.
-	 */
-	protected static final int DEFAULT_SKIP_LINES = 0;
+    /**
+     * The default line to start reading.
+     */
+    protected static final int DEFAULT_SKIP_LINES = 0;
 
-	/**
-	 * lines to skip before reading the first line
-	 */
-	protected int skipLines;
+    /**
+     * lines to skip before reading the first line
+     */
+    protected int skipLines;
 
-	protected LineParser lineParser;
+    protected LineParser lineParser;
 
-	protected ReaderRowMapper<T> rowMapper;
+    protected ReaderRowMapper<T> rowMapper;
 
-	@SuppressWarnings("unchecked")
-	public FlatFileReader(Reader reader, LineParser parser) {
-		this(reader, parser, new DefaultRowMapper());
-	}
+    @SuppressWarnings("unchecked")
+    public FlatFileReader(Reader reader, LineParser parser) {
+        this(reader, parser, new DefaultRowMapper());
+    }
 
-	public FlatFileReader(Reader reader, LineParser parser,
-			ReaderRowMapper<T> mapper) {
-		lineIterator = new BufferedReaderLineIterator(
-				new BufferedReader(reader));
-		this.lineParser = parser;
-		this.rowMapper = mapper;
-		this.skipLines = DEFAULT_SKIP_LINES;
-	}
+    public FlatFileReader(Reader reader, LineParser parser, ReaderRowMapper<T> mapper) {
+        this(new BufferedReaderLineIterator(new BufferedReader(reader)), parser, mapper);
+    }
 
-	public FlatFileReader(Reader reader, ReaderRowMapper<T> mapper) {
-		this(reader, null, mapper);
-	}
+    public FlatFileReader(LineIterator lineIterator, LineParser parser, ReaderRowMapper<T> mapper) {
+        this.lineIterator = lineIterator;
+        this.lineParser = parser;
+        this.rowMapper = mapper;
+        this.skipLines = DEFAULT_SKIP_LINES;
+    }
 
-	/* (non-Javadoc)
+    public FlatFileReader(Reader reader, ReaderRowMapper<T> mapper) {
+        this(reader, null, mapper);
+    }
+
+    /* (non-Javadoc)
      * @see com.tecacet.jflat.FileReader#readWithCallback(com.tecacet.jflat.FlatFileReaderCallback)
      */
-	@Override
-    public void readWithCallback(FlatFileReaderCallback<T> callback)
-			throws IOException {
-		for (int i = 0; i < skipLines; i++) {
-			lineIterator.getNextLine();
-		}
-		int row = 0;
-		String[] nextLineAsTokens = readNext();
-		while (nextLineAsTokens != null) {
-			T bean = rowMapper.getRow(nextLineAsTokens, ++row);
-			processRow(callback, row, nextLineAsTokens, bean);
-			nextLineAsTokens = readNext();
-		}
-	}
-	
-	protected void processRow(FlatFileReaderCallback<T> callback, int row, String[] nextLineAsTokens, T bean) {
-		callback.processRow(row, nextLineAsTokens, bean);
-	}
+    @Override
+    public void readWithCallback(FlatFileReaderCallback<T> callback) throws IOException {
+        for (int i = 0; i < skipLines; i++) {
+            lineIterator.getNextLine();
+        }
+        int row = 0;
+        String[] nextLineAsTokens = readNext();
+        while (nextLineAsTokens != null) {
+            T bean = rowMapper.getRow(nextLineAsTokens, ++row);
+            processRow(callback, row, nextLineAsTokens, bean);
+            nextLineAsTokens = readNext();
+        }
+    }
 
-	/* (non-Javadoc)
-     * @see com.tecacet.jflat.FileReader#readAll()
-     */
-	@Override
+    protected void processRow(FlatFileReaderCallback<T> callback, int row, String[] nextLineAsTokens, T bean) {
+        callback.processRow(row, nextLineAsTokens, bean);
+    }
+
+    @Override
     public List<T> readAll() throws IOException {
-		final List<T> allElements = new ArrayList<T>();
-		readWithCallback(new FlatFileReaderCallback<T>() {
+        final List<T> allElements = new ArrayList<T>();
+        readWithCallback(new FlatFileReaderCallback<T>() {
 
-			public void processRow(int rowIndex, String[] tokens, T bean) {
-				if (bean != null) {
-					allElements.add(bean);
-				}
-			}
-		});
-		return allElements;
+            public void processRow(int rowIndex, String[] tokens, T bean) {
+                if (bean != null) {
+                    allElements.add(bean);
+                }
+            }
+        });
+        return allElements;
+    }
 
-	}
+    protected String[] readNext() throws IOException {
+        String line = lineIterator.getNextLine();
+        if (line == null) {
+            return null;
+        }
+        return lineParser.parseLine(line);
+    }
 
-	protected String[] readNext() throws IOException {
-		String line = lineIterator.getNextLine();
-		if (line == null) {
-			return null;
-		}
-		return lineParser.parseLine(line);
-	}
+    /**
+     * The number of lines to skip before reading a file
+     * 
+     * @return number of skipped lines
+     */
+    public int getSkipLines() {
+        return skipLines;
+    }
 
-	/**
-	 * The number of lines to skip before reading a file
-	 * 
-	 * @return number of skipped lines
-	 */
-	public int getSkipLines() {
-		return skipLines;
-	}
+    /**
+     * Set the number of lines to skip before reading a file.
+     * 
+     * @param skipLines
+     *            number of skipped lines
+     */
+    public void setSkipLines(int skipLines) {
+        this.skipLines = skipLines;
+    }
 
-	/**
-	 * Set the number of lines to skip before reading a file.
-	 * 
-	 * @param skipLines
-	 *            number of skipped lines
-	 */
-	public void setSkipLines(int skipLines) {
-		this.skipLines = skipLines;
-	}
-
-	/**
-	 * Clean up resources
-	 * 
-	 * @throws IOException
-	 */
-	public void close() throws IOException {
-		lineIterator.close();
-	}
+    /**
+     * Clean up resources
+     * 
+     * @throws IOException
+     */
+    public void close() throws IOException {
+        lineIterator.close();
+    }
 
 }
