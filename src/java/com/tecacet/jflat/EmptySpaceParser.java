@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 import com.tecacet.jflat.LineParser;
 
 /**
- * Parses lines where the contents are seperated by anarbitrary number of spaces
+ * Parses lines where the contents are separated by an arbitrary number of spaces
  * 
  * @author Dimitri Papaioannou
  *
