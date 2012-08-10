@@ -31,7 +31,7 @@
 <FONT color="green">028</FONT>    <a name="line.28"></a>
 <FONT color="green">029</FONT>        public CSVReader(Reader reader, ReaderRowMapper&lt;T&gt; mapper) {<a name="line.29"></a>
 <FONT color="green">030</FONT>            super(reader, mapper);<a name="line.30"></a>
-<FONT color="green">031</FONT>            lineParser = new CSVParser(this);<a name="line.31"></a>
+<FONT color="green">031</FONT>            lineParser = new CSVParser(lineIterator);<a name="line.31"></a>
 <FONT color="green">032</FONT>        }<a name="line.32"></a>
 <FONT color="green">033</FONT>    <a name="line.33"></a>
 <FONT color="green">034</FONT>        public char getSeparator() {<a name="line.34"></a>
