@@ -16,6 +16,4 @@
 		<javac srcdir="${src.java}" destdir="${build.classes}" classpathref="class.path" debug="true" debuglevel="lines,source" />
 	</target>
 
-
-
 </project>
