@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 

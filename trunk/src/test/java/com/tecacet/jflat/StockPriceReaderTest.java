@@ -32,8 +32,12 @@ public class StockPriceReaderTest {
         converterRegistry.registerConverter(Date.class, dateConverter);
 
         // construct a bean row mapper for the LehmnaPrice object using the map
-        ReaderRowMapper<StockPrice> rowMapper = new BeanReaderRowMapper<StockPrice>(StockPrice.class, new String[] {
+        ReaderRowMapper<StockPrice> rowMapper = 
+        		new BeanReaderRowMapper<StockPrice>(StockPrice.class, new String[] {
                 "date", "openPrice", "closePrice", "volume" }, new String[] { "Date", "Open", "Close", "Volume" });
+
+        
+        converterRegistry.registerConverter(Date.class, dateConverter);
 
         // create a normal file reader
         FileReader fr = new FileReader("testdata/prices.csv");
