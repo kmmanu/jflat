@@ -12,7 +12,7 @@ public class CurrencyConverter extends AbstractConverter {
     
     @SuppressWarnings("rawtypes")
     @Override
-    protected Object convertToType(Class c, Object value) throws Throwable {
+    protected Object convertToType(Class c, Object value) {
         if (value == null) {
             return null;
         }
