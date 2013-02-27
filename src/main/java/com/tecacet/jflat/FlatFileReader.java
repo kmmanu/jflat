@@ -66,10 +66,7 @@ public class FlatFileReader<T> implements StructuredFileReader<T> {
     public FlatFileReader(Reader reader, ReaderRowMapper<T> mapper) {
         this(reader, null, mapper);
     }
-
-    /* (non-Javadoc)
-     * @see com.tecacet.jflat.FileReader#readWithCallback(com.tecacet.jflat.FlatFileReaderCallback)
-     */
+    
     @Override
     public void readWithCallback(FlatFileReaderCallback<T> callback) throws IOException {
         for (int i = 0; i < skipLines; i++) {

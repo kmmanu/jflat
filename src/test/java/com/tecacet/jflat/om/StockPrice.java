@@ -43,4 +43,9 @@ public class StockPrice {
     public double getAveragePrice() {
         return (openPrice + closePrice) / 2;
     }
+    
+    @Override
+    public String toString() {
+    	return String.format("%s %.2f, %d", date, openPrice, volume);
+    }
 }
