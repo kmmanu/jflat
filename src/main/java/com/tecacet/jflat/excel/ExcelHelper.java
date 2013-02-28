@@ -125,4 +125,14 @@ public class ExcelHelper {
 		return cell;
 	}
 
+		
+	public static String getExtension(String filename) {
+		int index = filename.lastIndexOf(".");
+		if (index < 0) {
+			return null;
+		}
+		String ext = filename.substring(index + 1);
+		return ext;
+	}
+
 }

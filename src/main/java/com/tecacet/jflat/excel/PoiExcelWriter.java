@@ -3,7 +3,6 @@ package com.tecacet.jflat.excel;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -18,7 +17,7 @@ public class PoiExcelWriter<T> {
 
 	public PoiExcelWriter(String filename, WriterRowMapper<T> mapper)
 			throws IOException {
-		this(ExcelHelper.getWorkbook(FilenameUtils.getExtension(filename)),
+		this(ExcelHelper.getWorkbook(ExcelHelper.getExtension(filename)),
 				mapper);
 	}
 
@@ -36,6 +35,7 @@ public class PoiExcelWriter<T> {
 			T bean = beans.get(rowindex);
 			writeOne(sheet, rowindex, bean);
 		}
+
 	}
 
 	public void writeOne(Sheet sheet, int rowindex, T bean) {

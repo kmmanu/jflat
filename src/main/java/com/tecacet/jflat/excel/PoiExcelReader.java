@@ -41,7 +41,7 @@ public class PoiExcelReader<T> extends ExcelReader<T> {
 	protected Sheet currentSheet = null;
 
 	private final InputStream is;
-	
+
 	private NumberFormat numberFormat = new DecimalFormat("#.#####");
 
 	@SuppressWarnings("unchecked")
@@ -93,8 +93,7 @@ public class PoiExcelReader<T> extends ExcelReader<T> {
 		List<String> tokens = new ArrayList<String>();
 		for (int c = row.getFirstCellNum(); c < row.getLastCellNum(); c++) {
 			Cell cell = row.getCell(c);
-			String cellValue = 
-					getCellContentAsString(cell);
+			String cellValue = getCellContentAsString(cell);
 			tokens.add(cellValue);
 		}
 		return tokens.toArray(new String[tokens.size()]);
@@ -111,30 +110,32 @@ public class PoiExcelReader<T> extends ExcelReader<T> {
 
 	private String getCellContentAsString(Cell cell) {
 		switch (cell.getCellType()) {
-        case Cell.CELL_TYPE_STRING:
-            return cell.getRichStringCellValue().getString();
-        case Cell.CELL_TYPE_NUMERIC:
-            if (DateUtil.isCellDateFormatted(cell)) {
-                return cell.getDateCellValue().toString();
-            } else {
-            	double d = cell.getNumericCellValue();
-            	//TODO find a flexible enough format for all numeric types
-            	return numberFormat.format(d);
-                //return Double.toString(d);
-            }
-        case Cell.CELL_TYPE_BOOLEAN:
-        	boolean b = cell.getBooleanCellValue();
-            return Boolean.toString(b);
-        case Cell.CELL_TYPE_FORMULA:
-            return cell.getCellFormula();
-        case Cell.CELL_TYPE_BLANK:
-        	return "";
-        case Cell.CELL_TYPE_ERROR:
-        	byte bt = cell.getErrorCellValue();
-        	return Byte.toString(bt);
-        default:
-            return cell.getStringCellValue();
-          
+		case Cell.CELL_TYPE_STRING:
+			return cell.getRichStringCellValue().getString();
+		case Cell.CELL_TYPE_NUMERIC:
+			if (DateUtil.isCellDateFormatted(cell)) {
+				return cell.getDateCellValue().toString();
+			} else {
+				double d = cell.getNumericCellValue();
+				// TODO find a flexible enough format for all numeric types
+				return numberFormat.format(d);
+				// return Double.toString(d);
+			}
+		case Cell.CELL_TYPE_BOOLEAN:
+			boolean b = cell.getBooleanCellValue();
+			return Boolean.toString(b);
+		case Cell.CELL_TYPE_FORMULA:
+			return cell.getCellFormula();
+		case Cell.CELL_TYPE_BLANK:
+			return "";
+		case Cell.CELL_TYPE_ERROR:
+			byte bt = cell.getErrorCellValue();
+			return Byte.toString(bt);
+		default:
+			return cell.getStringCellValue();
+
 		}
 	}
+
+
 }
