@@ -22,7 +22,8 @@
 	</target>
 
 	<target name="test" depends="compile.tests" description="Runs the unit tests">
-		<junit forkMode="perBatch" printsummary="true" showoutput="false" fork="true" failureproperty="tests-failed">
+		<junit forkMode="perBatch" printsummary="true" showoutput="false" fork="true" 
+			failureproperty="tests-failed">
 			<classpath>
 				<path refid="junit.class.path" />
 				<pathelement location="${build.classes}" />
@@ -44,6 +45,7 @@
 			</fileset>
 			<report format="frames" todir="${junit.report.dir}" />
 		</junitreport>
+		<fail if="tests-failed" message="Unit test(s) failed."/>
 	</target>
 
 </project>

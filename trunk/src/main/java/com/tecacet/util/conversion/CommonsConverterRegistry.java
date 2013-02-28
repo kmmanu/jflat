@@ -5,8 +5,6 @@ import java.util.Map;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class CommonsConverterRegistry implements ConverterRegistry {
 
     private static final CommonsConverterRegistry INSTANCE = new CommonsConverterRegistry();
@@ -30,7 +28,7 @@ public class CommonsConverterRegistry implements ConverterRegistry {
 
     @Override
     public Map<Class, Converter> getRegisteredConverters() {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
 }
