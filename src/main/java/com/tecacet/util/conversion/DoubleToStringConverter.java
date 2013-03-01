@@ -10,6 +10,10 @@ public class DoubleToStringConverter implements ToStringConverter<Double> {
     public DoubleToStringConverter() {
         this.format = FLOAT_FORMAT;
     }
+    
+    public DoubleToStringConverter(String format) {
+        this.format = format;
+    }
 
     @Override
     public String convertToString(Double amount) {
