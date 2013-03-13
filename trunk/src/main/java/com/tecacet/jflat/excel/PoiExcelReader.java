@@ -78,11 +78,9 @@ public class PoiExcelReader<T> extends ExcelReader<T> {
 		for (int rowIndex = sheet.getFirstRowNum(); rowIndex <= sheet
 				.getLastRowNum(); rowIndex++) {
 			Row row = sheet.getRow(rowIndex);
-
 			if (rowIndex < skipLines + sheet.getFirstRowNum()) {
 				continue;
 			}
-
 			String[] tokens = readRow(row);
 			T bean = rowMapper.getRow(tokens, rowIndex + 1);
 			callback.processRow(rowIndex, tokens, bean);
@@ -93,7 +91,10 @@ public class PoiExcelReader<T> extends ExcelReader<T> {
 		List<String> tokens = new ArrayList<String>();
 		for (int c = row.getFirstCellNum(); c < row.getLastCellNum(); c++) {
 			Cell cell = row.getCell(c);
-			String cellValue = getCellContentAsString(cell);
+			String cellValue = "";
+			if (cell != null) {
+				cellValue = getCellContentAsString(cell);
+			}
 			tokens.add(cellValue);
 		}
 		return tokens.toArray(new String[tokens.size()]);
@@ -108,6 +109,7 @@ public class PoiExcelReader<T> extends ExcelReader<T> {
 		is.close();
 	}
 
+	//TODO toString conversions should respect registered converters
 	private String getCellContentAsString(Cell cell) {
 		switch (cell.getCellType()) {
 		case Cell.CELL_TYPE_STRING:
