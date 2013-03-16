@@ -84,7 +84,7 @@ public class FlatFileReader<T> implements StructuredFileReader<T> {
 		int row = 0;
 		String[] nextLineAsTokens = readNext();
 		while (nextLineAsTokens != null) {
-			if (maxLines != null && row < maxLines) {
+			if (maxLines != null && row > maxLines) {
 				break;
 			}
 			T bean = rowMapper.getRow(nextLineAsTokens, ++row);
