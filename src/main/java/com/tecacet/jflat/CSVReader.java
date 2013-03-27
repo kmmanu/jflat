@@ -26,6 +26,10 @@ import java.io.Reader;
  */
 public class CSVReader<T> extends FlatFileReader<T> {
 
+	public CSVReader(Reader reader, Class<T> type, String[] columns) {
+		this(reader, new BeanReaderRowMapper<T>(type, new ColumnPositionMapping(columns)));
+	}
+	
     public CSVReader(Reader reader, ReaderRowMapper<T> mapper) {
         super(reader, mapper);
         lineParser = new CSVParser(lineIterator);
