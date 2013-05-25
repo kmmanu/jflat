@@ -82,9 +82,7 @@ public class ResultSetFileWriter<T> extends FlatFileWriter<T> {
     }
 
     protected void writeColumnNames(ResultSetMetaData metadata) throws SQLException, LineMergerException {
-
         int columnCount = metadata.getColumnCount();
-
         String[] nextLine = new String[columnCount];
         for (int i = 0; i < columnCount; i++) {
             nextLine[i] = metadata.getColumnName(i + 1);
@@ -93,9 +91,7 @@ public class ResultSetFileWriter<T> extends FlatFileWriter<T> {
     }
 
     protected String getColumnValue(ResultSet rs, int colType, int colIndex) throws SQLException, IOException {
-
         String value = "";
-
         switch (colType) {
         case Types.BIT:
             Object bit = rs.getObject(colIndex);
