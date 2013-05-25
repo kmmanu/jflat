@@ -20,7 +20,7 @@ import java.util.Map;
 
 import com.tecacet.util.conversion.ToStringConverter;
 import com.tecacet.util.introspection.PropertyAccessor;
-import com.tecacet.util.introspection.commons.CommonsBeanUtilsPropertyAccessor;
+import com.tecacet.util.introspection.spring.SpringBeanWrapperPropertyAccessor;
 
 /**
  * Basic implementation of WriterRowMapper that uses a columnMapping to
@@ -33,74 +33,77 @@ import com.tecacet.util.introspection.commons.CommonsBeanUtilsPropertyAccessor;
  */
 public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
 
-    private ColumnMapping columnMapping;
-    private PropertyAccessor<T> propertyAccessor;
-    private Map<String, ValueExtractor<T>> extractors = new HashMap<String, ValueExtractor<T>>();
-    private Map<Class, ToStringConverter> converters = new HashMap<Class, ToStringConverter>();
+	private ColumnMapping columnMapping;
+	private PropertyAccessor<T> propertyAccessor;
+	private Map<String, ValueExtractor<T>> extractors = new HashMap<String, ValueExtractor<T>>();
+	private Map<Class, ToStringConverter> converters = new HashMap<Class, ToStringConverter>();
 
-    public BeanWriterRowMapper(ColumnMapping columnMapping, PropertyAccessor<T> propertyAccessor) {
-        this.columnMapping = columnMapping;
-        this.propertyAccessor = propertyAccessor;
-    }
+	public BeanWriterRowMapper(ColumnMapping columnMapping,
+			PropertyAccessor<T> propertyAccessor) {
+		this.columnMapping = columnMapping;
+		this.propertyAccessor = propertyAccessor;
+	}
 
-    public BeanWriterRowMapper(Class<T> type, ColumnMapping mappingStrategy) {
-        this(mappingStrategy, new CommonsBeanUtilsPropertyAccessor<T>());
-    }
+	public BeanWriterRowMapper(Class<T> type, ColumnMapping mappingStrategy) {
+		this(mappingStrategy, new SpringBeanWrapperPropertyAccessor<T>());
+	}
 
-    public BeanWriterRowMapper(Class<T> type, String[] properties) {
-        this(new ColumnPositionMapping(properties), new CommonsBeanUtilsPropertyAccessor<T>());
-    }
+	public BeanWriterRowMapper(Class<T> type, String[] properties) {
+		this(new ColumnPositionMapping(properties),
+				new SpringBeanWrapperPropertyAccessor<T>());
+	}
 
-    public String[] getRow(T bean) {
-        String[] row = new String[columnMapping.getNumberOfColumns()];
-        for (int i = 0; i < row.length; i++) {
-            String property = columnMapping.getProperty(i);
-            if (property == null) {
-                continue;
-            }
-            ValueExtractor<T> extractor = extractors.get(property);
-            if (extractor == null) {
-                row[i] = toString(propertyAccessor.getProperty(bean, property));
-            } else {
-                row[i] = extractor.getValue(bean);
-            }
-        }
-        return row;
-    }
+	public String[] getRow(T bean) {
+		String[] row = new String[columnMapping.getNumberOfColumns()];
+		for (int i = 0; i < row.length; i++) {
+			String property = columnMapping.getProperty(i);
+			if (property == null) {
+				continue;
+			}
+			ValueExtractor<T> extractor = extractors.get(property);
+			if (extractor == null) {
+				row[i] = toString(propertyAccessor.getProperty(bean, property));
+			} else {
+				row[i] = extractor.getValue(bean);
+			}
+		}
+		return row;
+	}
 
-    private String toString(Object o) {
-        if (o == null || o instanceof String) {
-            return (String)o;
-        }
-        ToStringConverter converter = converters.get(o.getClass());
-        if (converter != null) {
-            return converter.convertToString(o);
-        }
-        return o.toString(); 
-    }
-    
-    public ColumnMapping getColumnMapping() {
-        return columnMapping;
-    }
+	private String toString(Object o) {
+		if (o == null || o instanceof String) {
+			return (String) o;
+		}
+		ToStringConverter converter = converters.get(o.getClass());
+		if (converter != null) {
+			return converter.convertToString(o);
+		}
+		return o.toString();
+	}
 
-    public void setColumnMapping(ColumnMapping columnMapping) {
-        this.columnMapping = columnMapping;
-    }
+	public ColumnMapping getColumnMapping() {
+		return columnMapping;
+	}
 
-    public void registerValueExtractor(String property, ValueExtractor<T> extractor) {
-        extractors.put(property, extractor);
-    }
+	public void setColumnMapping(ColumnMapping columnMapping) {
+		this.columnMapping = columnMapping;
+	}
 
-    public void deregisterValueExtractor(String property) {
-        extractors.remove(property);
-    }
-    
-    public void registerConverter(Class type, ToStringConverter converter) {
-        converters.put(type, converter);
-    }
+	public void registerValueExtractor(String property,
+			ValueExtractor<T> extractor) {
+		extractors.put(property, extractor);
+	}
 
-    public void deregisterConverter(Class type) {
-        converters.remove(type);
-    }
+	public void deregisterValueExtractor(String property) {
+		extractors.remove(property);
+	}
+
+	public void registerConverter(Class type, ToStringConverter converter) {
+		converters.put(type, converter);
+	}
+
+	public void deregisterConverter(Class type) {
+		converters.remove(type);
+	}
 
 }
