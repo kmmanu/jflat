@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<packaging>jar</packaging>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tecacet.jflat</groupId>
 	<artifactId>jflat</artifactId>
@@ -34,6 +35,8 @@
 
 	<scm>
 		<url>http://jflat.googlecode.com/svn/</url>
+		<connection>http://jflat.googlecode.com/svn/trunk/</connection>
+		<developerConnection>https://jflat.googlecode.com/svn/trunk/</developerConnection>
 	</scm>
 
 	<ciManagement>
@@ -71,6 +74,30 @@
 						<phase>package</phase>
 						<goals>
 							<goal>cobertura</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -136,5 +163,12 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+	
 
 </project>
