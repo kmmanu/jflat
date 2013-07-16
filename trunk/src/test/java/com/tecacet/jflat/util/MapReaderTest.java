@@ -17,7 +17,7 @@ public class MapReaderTest {
     public void testReadMap() throws IOException {
         String columns = "build-code.properties";
         MapReader mapReader = new MapReader();
-        Map<String, String> map = mapReader.readMap(new FileInputStream(columns));
+        //Map<String, String> map = mapReader.readMap(new FileInputStream(columns));
         //TODO
     }
 
