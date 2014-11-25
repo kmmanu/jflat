@@ -25,8 +25,7 @@ import com.tecacet.util.introspection.BeanFactory;
 import com.tecacet.util.introspection.BeanIntrospectorException;
 import com.tecacet.util.introspection.DefaultBeanFactory;
 import com.tecacet.util.introspection.PropertyAccessor;
-
-import com.tecacet.util.introspection.spring.SpringBeanWrapperPropertyAccessor;
+import com.tecacet.util.introspection.jodd.JoddPropertyAccessor;
 
 /**
  * Basic implementation of ReaderRowMapper that uses a columnMapping to
@@ -81,7 +80,7 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
 	 * @param columnMapping
 	 */
 	public BeanReaderRowMapper(Class<T> type, ColumnMapping columnMapping) {
-		this(type, new SpringBeanWrapperPropertyAccessor<T>(), columnMapping);
+		this(type, new JoddPropertyAccessor<T>(), columnMapping);
 	}
 
 	/**
@@ -93,14 +92,14 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
 	 *            A map from column names to properties
 	 */
 	public BeanReaderRowMapper(Class<T> type, Map<String, String> columns) {
-		this(type, new SpringBeanWrapperPropertyAccessor<T>(),
-				new HeaderColumnNameMapping(columns));
+		this(type, new JoddPropertyAccessor<T>(), new HeaderColumnNameMapping(
+				columns));
 	}
 
 	public BeanReaderRowMapper(Class<T> type, String[] properties,
 			String[] header) {
-		this(type, new SpringBeanWrapperPropertyAccessor<T>(),
-				new HeaderColumnNameMapping(properties, header));
+		this(type, new JoddPropertyAccessor<T>(), new HeaderColumnNameMapping(
+				properties, header));
 	}
 
 	/**
