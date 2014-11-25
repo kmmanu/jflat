@@ -13,9 +13,8 @@ import org.apache.commons.beanutils.converters.DateConverter;
 import org.junit.Test;
 
 import com.tecacet.jflat.om.StockPrice;
-import com.tecacet.util.conversion.ConverterPropertyEditor;
 import com.tecacet.util.conversion.DateToStringConverter;
-import com.tecacet.util.introspection.spring.SpringBeanWrapperPropertyAccessor;
+import com.tecacet.util.introspection.jodd.JoddPropertyAccessor;
 
 public class SpringStockPriceReaderTest {
 
@@ -25,12 +24,12 @@ public class SpringStockPriceReaderTest {
         // construct a bean row mapper for the LehmnaPrice object using the map
         ColumnMapping columnMapping = new HeaderColumnNameMapping(new String[] { "date", "openPrice", "closePrice",
                 "volume" }, new String[] { "Date", "Open", "Close", "Volume" });
-        SpringBeanWrapperPropertyAccessor<StockPrice> propertyAccessor = new SpringBeanWrapperPropertyAccessor<StockPrice>();
+        JoddPropertyAccessor<StockPrice> propertyAccessor = new JoddPropertyAccessor<StockPrice>();
 
         final DateConverter dateConverter = new DateConverter(null);
         dateConverter.setPattern("yyyy-MM-dd");
-        propertyAccessor.getBeanWrapper().registerCustomEditor(Date.class,
-                new ConverterPropertyEditor(Date.class, dateConverter));
+//        propertyAccessor.getBeanWrapper().registerCustomEditor(Date.class,
+//                new ConverterPropertyEditor(Date.class, dateConverter));
         
         ReaderRowMapper<StockPrice> rowMapper = new BeanReaderRowMapper<StockPrice>(StockPrice.class, propertyAccessor,
                 columnMapping);

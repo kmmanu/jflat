@@ -20,7 +20,7 @@ import java.util.Map;
 
 import com.tecacet.util.conversion.ToStringConverter;
 import com.tecacet.util.introspection.PropertyAccessor;
-import com.tecacet.util.introspection.spring.SpringBeanWrapperPropertyAccessor;
+import com.tecacet.util.introspection.jodd.JoddPropertyAccessor;
 
 /**
  * Basic implementation of WriterRowMapper that uses a columnMapping to
@@ -45,12 +45,12 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
 	}
 
 	public BeanWriterRowMapper(Class<T> type, ColumnMapping mappingStrategy) {
-		this(mappingStrategy, new SpringBeanWrapperPropertyAccessor<T>());
+		this(mappingStrategy, new JoddPropertyAccessor<T>());
 	}
 
 	public BeanWriterRowMapper(Class<T> type, String[] properties) {
 		this(new ColumnPositionMapping(properties),
-				new SpringBeanWrapperPropertyAccessor<T>());
+				new JoddPropertyAccessor<T>());
 	}
 
 	public String[] getRow(T bean) {

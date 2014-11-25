@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Order {
 
-    private String number;
+    private String account;
     private Customer customer;
     private int quantity;
     private double price;
@@ -15,12 +15,12 @@ public class Order {
 
     }
 
-    public String getNumber() {
-        return number;
+    public String getAccount() {
+        return account;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setAccount(String number) {
+        this.account = number;
     }
 
     public Customer getCustomer() {

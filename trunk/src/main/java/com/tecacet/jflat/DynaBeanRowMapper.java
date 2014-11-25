@@ -19,14 +19,14 @@ import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaClass;
 
 import com.tecacet.util.introspection.DynaBeanFactory;
-import com.tecacet.util.introspection.commons.CommonsBeanUtilsPropertyAccessor;
+import com.tecacet.util.introspection.jodd.JoddPropertyAccessor;
 
 public class DynaBeanRowMapper extends BeanReaderRowMapper<DynaBean> {
 
 	public DynaBeanRowMapper(DynaClass dynaClass, String[] properties,
 			String[] names) {
 		super(DynaBean.class,
-				new CommonsBeanUtilsPropertyAccessor<DynaBean>(),
+				new JoddPropertyAccessor<DynaBean>(),
 				new HeaderColumnNameMapping(properties, names));
 		this.setBeanFactory(new DynaBeanFactory(dynaClass));
 	}
