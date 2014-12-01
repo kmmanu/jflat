@@ -19,8 +19,6 @@ package com.tecacet.util.conversion;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import com.tecacet.util.conversion.ToStringConverter;
-
 public class BigDecimalToStringConverter implements ToStringConverter<BigDecimal> {
 
     private static final String FLOAT_FORMAT = "%019.5f";
@@ -35,7 +33,7 @@ public class BigDecimalToStringConverter implements ToStringConverter<BigDecimal
     }
 
     @Override
-    public String convertToString(BigDecimal amount) {
+    public String convert(BigDecimal amount) {
         if (amount == null) {
             return null;
         }

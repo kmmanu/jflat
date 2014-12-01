@@ -15,29 +15,29 @@ import org.junit.Test;
 import com.tecacet.jflat.om.StockPrice;
 import com.tecacet.util.conversion.ConverterRegistry;
 import com.tecacet.util.conversion.GenericConverterRegistry;
+import com.tecacet.util.conversion.commons.CommonsToDataConverterAdapter;
 
 public class StockPriceReaderTest {
 
     @Test
     public void testSimpleRead() throws IOException, LineMergerException {
 
-        //TODO Problem: converters must be registered BEFORE BeanReaderRowMapper is initialized
-        
+        // TODO Problem: converters must be registered BEFORE
+        // BeanReaderRowMapper is initialized
+
         // The following code registers a converted with Commons Beans so that
         // it knows how to create dates from string
         // (required commons-beanutils-1.8)
         DateConverter dateConverter = new DateConverter(null);
         dateConverter.setPattern("yyyy-MM-dd");
         ConverterRegistry converterRegistry = GenericConverterRegistry.getInstance();
-        converterRegistry.registerConverter(Date.class, dateConverter);
+        converterRegistry.registerConverter(Date.class, new CommonsToDataConverterAdapter(Date.class, dateConverter));
 
         // construct a bean row mapper for the LehmnaPrice object using the map
-        ReaderRowMapper<StockPrice> rowMapper = 
-        		new BeanReaderRowMapper<StockPrice>(StockPrice.class, new String[] {
+        ReaderRowMapper<StockPrice> rowMapper = new BeanReaderRowMapper<StockPrice>(StockPrice.class, new String[] {
                 "date", "openPrice", "closePrice", "volume" }, new String[] { "Date", "Open", "Close", "Volume" });
 
-        
-        converterRegistry.registerConverter(Date.class, dateConverter);
+        converterRegistry.registerConverter(Date.class, new CommonsToDataConverterAdapter(Date.class, dateConverter));
 
         // create a normal file reader
         FileReader fr = new FileReader("testdata/prices.csv");

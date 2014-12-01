@@ -3,11 +3,9 @@ package com.tecacet.util.conversion;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.beanutils.Converter;
+public final class GenericConverterRegistry implements ConverterRegistry {
 
-public class GenericConverterRegistry implements ConverterRegistry {
-
-    private Map<Class, Converter> converters = new HashMap<Class, Converter>();
+    private Map<Class<?>, DataConverter<?, ?>> converters = new HashMap<Class<?>, DataConverter<?, ?>>();
 
     private static final GenericConverterRegistry INSTANSE = new GenericConverterRegistry();
 
@@ -20,18 +18,13 @@ public class GenericConverterRegistry implements ConverterRegistry {
     }
 
     @Override
-    public void registerConverter(Class type, Converter converter) {
+    public <FROM, TO> void registerConverter(Class<TO> type, DataConverter<FROM, TO> converter) {
         converters.put(type, converter);
     }
 
     @Override
-    public void deregister(Class type) {
+    public void deregister(Class<?> type) {
         converters.remove(type);
-    }
-
-    @Override
-    public Map<Class, Converter> getRegisteredConverters() {
-        return converters;
     }
 
 }

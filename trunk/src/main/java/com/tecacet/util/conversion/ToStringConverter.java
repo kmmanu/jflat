@@ -5,7 +5,8 @@ package com.tecacet.util.conversion;
  * 
  * @param T the type to be converted to String
  */
-public interface ToStringConverter<T> {
+public interface ToStringConverter<T> extends DataConverter<T, String> {
 
-    String convertToString(T value);
+	@Override
+    String convert(T value);
 }

@@ -2,21 +2,22 @@ package com.tecacet.util.conversion;
 
 import java.beans.PropertyEditorSupport;
 
-public class ToStringPropertyEditor extends PropertyEditorSupport {
+public class ToStringPropertyEditor<T> extends PropertyEditorSupport {
 
-    private ToStringConverter converter;
+    private ToStringConverter<T> converter;
 
-    public ToStringPropertyEditor(ToStringConverter converter) {
+    public ToStringPropertyEditor(ToStringConverter<T> converter) {
         super();
         this.converter = converter;
     }
 
     @Override
     public String getAsText() {
-        Object value = getValue();
+        @SuppressWarnings("unchecked")
+        T value = (T) getValue();
         if (value == null) {
             return null;
         }
-        return converter.convertToString(value);
+        return converter.convert(value);
     }
 }

@@ -1,14 +1,10 @@
 package com.tecacet.util.conversion;
 
-import java.util.Map;
-
-import org.apache.commons.beanutils.Converter;
 
 public interface ConverterRegistry {
 
-	void registerConverter(Class type, Converter converter);
+	 <TO,FROM> void registerConverter(Class<FROM> type, DataConverter<TO,FROM> converter);
 	
-	void deregister(Class type);
+	void deregister(Class<?> type);
 	
-	Map<Class, Converter> getRegisteredConverters();
 }

@@ -16,7 +16,7 @@ public class DoubleToStringConverter implements ToStringConverter<Double> {
     }
 
     @Override
-    public String convertToString(Double amount) {
+    public String convert(Double amount) {
         if (amount == null) {
             return null;
         }

@@ -16,7 +16,7 @@ public class SmartStringConverterTest {
 		converter.registerConverter(Date.class, new DateToStringConverter());
 		converter.registerConverter(Double.class, new DoubleToStringConverter());
 		Calendar c = new GregorianCalendar(2010, 2, 3);
-		assertEquals("03-03-2010", converter.convertToString(c.getTime()));
+		assertEquals("03-03-2010", converter.convert(c.getTime()));
 	}
 
 }

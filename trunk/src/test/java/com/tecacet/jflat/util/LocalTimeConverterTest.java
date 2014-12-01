@@ -1,6 +1,6 @@
 package com.tecacet.jflat.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.joda.time.LocalTime;
 import org.junit.Test;
@@ -12,8 +12,8 @@ public class LocalTimeConverterTest {
     @Test
     public void testConvertToTypeClassObject() {
        LocalTimeConverter converter = new LocalTimeConverter("hh:mm a");
-       LocalTime t = (LocalTime) converter.convert(LocalTime.class, "9:21 PM");
-       System.err.println(t);
+       LocalTime t =  converter.convert( "9:21 PM");
+       assertEquals("21:21:00.000",t.toString());
     }
 
 }
