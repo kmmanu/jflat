@@ -76,7 +76,7 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
 		}
 		ToStringConverter converter = converters.get(o.getClass());
 		if (converter != null) {
-			return converter.convertToString(o);
+			return converter.convert(o);
 		}
 		return o.toString();
 	}

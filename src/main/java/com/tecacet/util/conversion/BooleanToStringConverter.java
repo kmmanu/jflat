@@ -16,7 +16,7 @@ public class BooleanToStringConverter implements ToStringConverter<Boolean> {
     }
 
     @Override
-    public String convertToString(Boolean value) {
+    public String convert(Boolean value) {
         if (value == null) {
             return null;
         }

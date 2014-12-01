@@ -3,8 +3,6 @@ package com.tecacet.util.conversion;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.beanutils.converters.AbstractConverter;
-
 /**
  * commons beanutils does not have real support for conversion of arbitrary
  * types to strings. This is a replacement for the default beanutils String
@@ -12,51 +10,45 @@ import org.apache.commons.beanutils.converters.AbstractConverter;
  * registering ToStringConverters.
  * 
  */
-public class SmartStringConverter extends AbstractConverter {
+public class SmartStringConverter implements ToStringConverter<Object> {
 
-    private Map<Class, ToStringConverter> registry = new HashMap<Class, ToStringConverter>();
+	private Map<Class<?>, ToStringConverter<?>> registry = new HashMap<Class<?>, ToStringConverter<?>>();
 
-    /**
-     * Register a ToString converter for a class. The converter will apply to
-     * all subtypes and implementations
-     * 
-     * @param type
-     *            the supertype for which this converter is applicable
-     * @param converter
-     */
-    public void registerConverter(Class type, ToStringConverter converter) {
-        registry.put(type, converter);
-    }
+	/**
+	 * Register a ToString converter for a class. The converter will apply to
+	 * all subtypes and implementations
+	 * 
+	 * @param type
+	 *            the supertype for which this converter is applicable
+	 * @param converter
+	 */
+	public void registerConverter(Class<?> type, ToStringConverter<?> converter) {
+		registry.put(type, converter);
+	}
 
-    public void deregisterConverter(Class type) {
-        registry.remove(type);
-    }
+	public void deregisterConverter(Class<?> type) {
+		registry.remove(type);
+	}
 
+	public boolean supports(Class<?> type) {
+		return registry.containsKey(type);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    protected Object convertToType(Class clazz, Object value) throws Throwable {
-        return convertToString(value);
-    }
+	public String convert(Object from) {
+		if (from == null) {
+			return null;
+		}
+		Class<?> type = from.getClass();
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public String convertToString(Object value) {
-        if (value == null) {
-            return null;
-        }
-        Class type = value.getClass();
-
-        for (Class clazz : registry.keySet()) {
-            if (clazz.isAssignableFrom(type)) {
-                ToStringConverter converter = registry.get(clazz);
-                return converter.convertToString(value);
-            }
-        }
-        return value.toString();
-    }
-    
-    @Override
-    protected Class getDefaultType() {
-        return String.class;
-    }
+		for (Class<?> clazz : registry.keySet()) {
+			if (clazz.isAssignableFrom(type)) {
+				ToStringConverter converter = registry.get(clazz);
+				return converter.convert(from);
+			}
+		}
+		return from.toString();
+	}
 
 }

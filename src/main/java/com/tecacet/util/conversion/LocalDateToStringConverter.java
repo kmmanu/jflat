@@ -18,7 +18,7 @@ public class LocalDateToStringConverter implements ToStringConverter<LocalDate> 
     }
     
     @Override
-    public String convertToString(LocalDate value) {
+    public String convert(LocalDate value) {
         if (value == null) {
             return null;
         }

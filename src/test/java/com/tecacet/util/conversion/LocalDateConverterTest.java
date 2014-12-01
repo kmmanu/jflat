@@ -6,11 +6,11 @@ import org.apache.commons.beanutils.ConversionException;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 
-import com.tecacet.util.conversion.LocalDateConverter;
+import com.tecacet.util.conversion.commons.CommonsLocalDateConverter;
 
 public class LocalDateConverterTest {
 
-    private LocalDateConverter converter = new LocalDateConverter("MM/dd/yyyy");
+    private CommonsLocalDateConverter converter = new CommonsLocalDateConverter("MM/dd/yyyy");
 
     @Test
     public void testConvertToTypeClassObject() {
@@ -23,7 +23,7 @@ public class LocalDateConverterTest {
     public void testConvertWithMutlipleFormats() {
         LocalDate referenceDate = new LocalDate(1999, 2, 13);
     	String[] dateFormats = {"MM/dd/yyyy", "MM-dd-yyyy"};
-    	LocalDateConverter multiFormatConverter = new LocalDateConverter(dateFormats);
+    	CommonsLocalDateConverter multiFormatConverter = new CommonsLocalDateConverter(dateFormats);
     	
         LocalDate dateWithSlashes = (LocalDate) multiFormatConverter.convert(LocalDate.class, "02/13/1999");
         assertEquals("Converted date from MM/dd/yyyy format", referenceDate, dateWithSlashes);
@@ -49,9 +49,5 @@ public class LocalDateConverterTest {
         assertEquals(null, result);
     }
 
-    @Test
-    public void testGetDefaultType() {
-        assertEquals(LocalDate.class, converter.getDefaultType());
-    }
 
 }

@@ -28,10 +28,10 @@ public class BigDecimalStringConverterTest {
     @Test
     public void testConvertToString() {
        BigDecimalToStringConverter converter = new BigDecimalToStringConverter();
-       converter.convertToString(new BigDecimal(0.00000001)); //NO Exception
+       converter.convert(new BigDecimal(0.00000001)); //NO Exception
        
        converter = new BigDecimalToStringConverter("%03.3f");
-       String str = converter.convertToString(new BigDecimal(67.54));
+       String str = converter.convert(new BigDecimal(67.54));
        assertEquals("67.540", str);
     }
 

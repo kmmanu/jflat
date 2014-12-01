@@ -19,7 +19,7 @@ public class DateToStringConverter implements ToStringConverter<Date> {
     }
 
     @Override
-    public String convertToString(Date value) {
+    public String convert(Date value) {
         if (value == null) {
             return null;
         }
