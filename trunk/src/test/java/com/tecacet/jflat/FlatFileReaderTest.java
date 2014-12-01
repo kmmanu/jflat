@@ -26,6 +26,7 @@ import org.junit.Test;
 
 public class FlatFileReaderTest {
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testCustomParser() throws Exception {
         DefaultRowMapper mapper = new DefaultRowMapper();
@@ -48,7 +49,7 @@ public class FlatFileReaderTest {
 
         };
         FileReader reader = new FileReader("testdata/ffwheaderAndFooter.txt");
-        com.tecacet.jflat.StructuredFileReader<String[]> flatReader = new FlatFileReader<String[]>(reader, lineParser, mapper);
+        StructuredFileReader<String[]> flatReader = new FlatFileReader<String[]>(reader, lineParser, mapper);
         List<String[]> lines = flatReader.readAll();
         assertEquals(2, lines.size());
         assertEquals("L463", lines.get(0)[2]);

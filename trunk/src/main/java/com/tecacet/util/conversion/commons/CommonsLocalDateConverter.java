@@ -20,6 +20,7 @@ public class CommonsLocalDateConverter extends AbstractConverter {
         dateConverter.setPatterns(dateFormatStrings);
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     protected Object convertToType(Class type, Object o) {
         String value = (String) o;
@@ -30,11 +31,13 @@ public class CommonsLocalDateConverter extends AbstractConverter {
         return new LocalDate(date);
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     protected Class getDefaultType() {
         return LocalDate.class;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     protected Object handleMissing(Class c) {
         return null;

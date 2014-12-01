@@ -18,6 +18,7 @@ public class JoddConverterRegistry implements ConverterRegistry {
         return INSTANCE;
     }
     
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public <TO, FROM> void registerConverter(Class<FROM> type, DataConverter<TO, FROM> converter) {
        TypeConverterManager.register(type, new DataConverterToJoddAdapter(converter));

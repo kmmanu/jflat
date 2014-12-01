@@ -19,7 +19,7 @@ public class EmptySpaceParser implements LineParser {
     public String[] parseLine(String line) throws IOException {
         StringTokenizer st = new StringTokenizer(line, " ");
         List<String> columns = new ArrayList<String>();
-        for (int col = 0; st.hasMoreTokens(); col++) {
+        for (; st.hasMoreTokens();) {
             String token = st.nextToken().trim();
             columns.add(token);
         } // end for each column

@@ -25,6 +25,7 @@ import java.io.Reader;
  */
 public class DefaultCSVReader extends CSVReader<String[]> {
 
+    @SuppressWarnings("unchecked")
     public DefaultCSVReader(Reader reader) {
         super(reader, new DefaultRowMapper());
     }
