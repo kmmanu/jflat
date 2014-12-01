@@ -17,10 +17,11 @@ public class CommonsConverterRegistry implements ConverterRegistry {
     }
 
     @Override
-    public void deregister(Class type) {
+    public void deregister(Class<?> type) {
         ConvertUtils.deregister(type);
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public <TO, FROM> void registerConverter(Class<FROM> type, DataConverter<TO, FROM> converter) {
         ConvertUtils.register(new DataConverterToCommonsAdapter(converter), type);

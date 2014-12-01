@@ -31,6 +31,7 @@ import com.tecacet.jflat.LineMergerException;
  * @author Dimitri Papaioannou
  *
  */
+@SuppressWarnings("rawtypes")
 public class TableModelFileWriter extends FlatFileWriter {
 
     private boolean includeColumnNames = true;
@@ -43,6 +44,7 @@ public class TableModelFileWriter extends FlatFileWriter {
         this(writer, new CSVLineMerger());
     }
     
+    @SuppressWarnings("unchecked")
     public TableModelFileWriter(Writer writer, LineMerger merger) {
         super(writer, merger, null);
     }

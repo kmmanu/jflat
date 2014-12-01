@@ -36,7 +36,7 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
 	private ColumnMapping columnMapping;
 	private PropertyAccessor<T> propertyAccessor;
 	private Map<String, ValueExtractor<T>> extractors = new HashMap<String, ValueExtractor<T>>();
-	private Map<Class, ToStringConverter> converters = new HashMap<Class, ToStringConverter>();
+	private Map<Class<?>, ToStringConverter<?>> converters = new HashMap<Class<?>, ToStringConverter<?>>();
 
 	public BeanWriterRowMapper(ColumnMapping columnMapping,
 			PropertyAccessor<T> propertyAccessor) {
@@ -70,7 +70,8 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
 		return row;
 	}
 
-	private String toString(Object o) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+    private String toString(Object o) {
 		if (o == null || o instanceof String) {
 			return (String) o;
 		}
@@ -98,11 +99,11 @@ public class BeanWriterRowMapper<T> implements WriterRowMapper<T> {
 		extractors.remove(property);
 	}
 
-	public void registerConverter(Class type, ToStringConverter converter) {
+	public void registerConverter(Class<?> type, ToStringConverter<?> converter) {
 		converters.put(type, converter);
 	}
 
-	public void deregisterConverter(Class type) {
+	public void deregisterConverter(Class<?> type) {
 		converters.remove(type);
 	}
 

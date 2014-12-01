@@ -19,8 +19,7 @@ package com.tecacet.jflat;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.beanutils.Converter;
-
+import com.tecacet.util.conversion.DataConverter;
 import com.tecacet.util.introspection.BeanFactory;
 import com.tecacet.util.introspection.BeanIntrospectorException;
 import com.tecacet.util.introspection.DefaultBeanFactory;
@@ -45,7 +44,8 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
 	private BeanFactory beanFactory = new DefaultBeanFactory();
 	private Class<T> type;
 
-	private Map<String, Converter> converters = new HashMap<String, Converter>();
+	@SuppressWarnings("rawtypes")
+    private Map<String, DataConverter> converters = new HashMap<String, DataConverter>();
 
 	/**
 	 * Construct a rowMapper using a BeanManipulator to create beans and
@@ -107,7 +107,7 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
 	 * WARNING: This implementation returns null for the header row if the
 	 * ColumnMapping requires a header row.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public T getRow(String[] row, int rowNumber)
 			throws BeanIntrospectorException {
@@ -123,9 +123,9 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
 			if (property == null) {
 				continue;
 			}
-			Converter converter = converters.get(property);
+			DataConverter converter = converters.get(property);
 			if (converter != null) {
-				Object value = converter.convert(null, row[i]);
+				Object value = converter.convert(row[i]);
 				propertyAccessor.setProperty(bean, property, value);
 			} else {
 				propertyAccessor.setProperty(bean, property, row[i]);
@@ -162,7 +162,8 @@ public class BeanReaderRowMapper<T> implements ReaderRowMapper<T> {
 		this.propertyAccessor = propertyAccessor;
 	}
 
-	public void registerConverter(String property, Converter converter) {
+	@SuppressWarnings("rawtypes")
+    public void registerConverter(String property, DataConverter converter) {
 		converters.put(property, converter);
 	}
 }

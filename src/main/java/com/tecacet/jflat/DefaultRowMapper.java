@@ -21,6 +21,7 @@ package com.tecacet.jflat;
  * @author Dimitri Papaioannou
  * 
  */
+@SuppressWarnings("rawtypes")
 public class DefaultRowMapper implements ReaderRowMapper, WriterRowMapper {
 
     public Object getRow(String[] row, int rowNumber) {
