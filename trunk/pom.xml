@@ -113,6 +113,11 @@
 			</plugin>
 		</plugins>
 	</reporting>
+	
+	<properties>
+		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+		<poi.version>3.10.1</poi.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -138,12 +143,12 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>3.9</version>
+			<version>${poi.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.9</version>
+			<version>${poi.version}</version>
 		</dependency>
 
 		<dependency>
