@@ -56,6 +56,9 @@ public class HeaderColumnNameMapping implements ColumnMapping {
         if (header == null) {
             throw new IllegalStateException("getProperty() is called but the header is not set.");
         }
+        if (col >= header.length) {
+            return null;
+        }
         if (columnMapping != null) {
             return columnMapping.get(header[col]);
         }
