@@ -35,8 +35,9 @@
 
 	<scm>
 		<url>http://jflat.googlecode.com/svn/</url>
-		<connection>http://jflat.googlecode.com/svn/trunk/</connection>
-		<developerConnection>https://jflat.googlecode.com/svn/trunk/</developerConnection>
+		<connection>scm:svn:http://jflat.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://jflat.googlecode.com/svn/trunk/</developerConnection>
+		<tag>HEAD</tag>
 	</scm>
 
 	<ciManagement>
@@ -49,21 +50,32 @@
 		<url>http://code.google.com/p/jflat/issues/list/</url>
 	</issueManagement>
 
+	<properties>
+		<java.version>1.6</java.version>
+		<maven-compiler.version>3.3</maven-compiler.version>
+		<maven-source.version>2.4</maven-source.version>
+		<maven-javadoc.version>2.10.3</maven-javadoc.version>
+		<jdepend-plugin.version>2.0</jdepend-plugin.version>
+		<cobertura-plugin.version>2.7</cobertura-plugin.version>
+		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+		<poi.version>3.10.1</poi.version>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>${maven-compiler.version}</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			<!-- Cobertura coverage report -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>${cobertura-plugin.version}</version>
 				<configuration>
 					<formats>
 						<format>xml</format>
@@ -81,6 +93,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source.version}</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -93,6 +106,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc.version}</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -110,14 +124,11 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>
+				<version>${jdepend-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</reporting>
-	
-	<properties>
-		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
-		<poi.version>3.10.1</poi.version>
-	</properties>
+
 
 	<dependencies>
 		<dependency>
@@ -168,7 +179,7 @@
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
-		<version>7</version>
+		<version>9</version>
 	</parent>
 
 </project>
