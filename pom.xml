@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tecacet</groupId>
 	<artifactId>jflat</artifactId>
-	<version>1.6.8-SNAPSHOT</version>
+	<version>1.6.8</version>
 
 	<name>JFlat</name>
 	<description>
@@ -33,9 +33,9 @@
 	</licenses>
 
 	<scm>
-		<url>http://jflat.googlecode.com/svn/</url>
-		<connection>scm:svn:http://jflat.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://jflat.googlecode.com/svn/trunk/</developerConnection>
+		<url>http://jflat.googlecode.com/svn/tags/jflat-1.6.8</url>
+		<connection>scm:svn:http://jflat.googlecode.com/svn/tags/jflat-1.6.8</connection>
+		<developerConnection>scm:svn:https://jflat.googlecode.com/svn/tags/jflat-1.6.8</developerConnection>
 	</scm>
 
 	<ciManagement>
